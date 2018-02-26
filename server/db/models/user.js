@@ -26,6 +26,21 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  mailingAddress: {
+    type: Sequelize.STRING
+  },
+  firstName: Sequelize.STRING,
+  lastName: Sequelize.STRING,
+  fullName: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName')
+    }
+  },
+  passwordUpdateDate: {
+    type: Sequelize.DATE,
+    defaultValue: Date.now()
   }
 })
 
