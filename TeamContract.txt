@@ -1,0 +1,65 @@
+# NAME
+- music gear (instruments / helmets)
+a music gear and apparel shop (halloween type costumes)
+
+*This document describes our team social contract for this project*
+
+Reference Establishing Norms https://docs.google.com/document/d/1qquhoredhOu-DCmByEU-KDdJXP6XDL962fwYdl_lLaQ/edit
+Example: https://docs.google.com/document/d/1PdSJFN1tqqBDBlDxmLxJOu59or1Nt0DJnFYd0hOrfww/edit#
+
+Roles
+- Taskmaster
+- Gitmaster
+- Testmaster
+
+# Daily process
+Morning standup started by yesterday's Taskmaster
+	Slack big Pat for this meeting
+	New roles assigned (by yesterday’s Taskmaster)
+	Yesterday? Today? Obstacles? (by today’s Taskmaster)
+	keep it relevant
+	update us on how you feel
+Pair program on assigned tasks when appropriate
+Re-group meeting right after lunch: 1:30
+	Record issues that are non-blocking and discuss.
+	At 1:30pm have re-group meeting where you check-in with blockers, status updates and plan for EOD merge
+Bring up any blocking issues after 15 minutes of spinning your wheels
+	check with group members
+	call in more people as needed. gather research etc before
+Immediately prior to end of day make applicable PRs, review each other's code and merge into master
+	dont push up non-working code (tbd)
+	don't merge your own PR if possible
+
+# Team expectations
+Each of us reserves the rights to our nights and weekends, and we have all been straightforward about when and how we can commit to working on the project
+	Delegate pair tasks earlier in the day if possible.
+If you have a blocking issue, slack before interrupting another's train of coding-thought
+	If no one responds, we're cool with getting bothered.
+We will assign tasks vertically (instead of horizontally)
+	Initial setup: pair front end vs back end
+
+Style Guide:
+	React: .js (not .jsx)
+		capitalize component file names
+	Semantic UI
+	SEMICOLONS!!!
+
+WRITE TESTS!!!
+	Single /tests folder (broken out)
+	*.spec.js
+
+None of us will specialize in terms of front-end and back-end code
+Share the mic
+Disagree often and discuss -- argue infrequently
+At least message the group when you change what you are working on
+
+# Issues
+If the group is divided on a certain decision we will take the following steps:
+	Take 10-15 minute break
+	List out the pros / cons
+	Vote on it (tiebreaker)
+	If the vote is split, escalate to a fellow or instructor
+If you are frustrated
+	Take a walk or get some water
+	Bring in a 3rd party (e.g. fellow, instructor) to mediate if you feel too frustrated
+
