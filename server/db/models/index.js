@@ -1,7 +1,8 @@
-const User = require('./user');
-const Order = require('./order');
-const Product = require('./product');
-const Review = require('./review');
+const User = require('./user')
+const Order = require('./order')
+const Product = require('./product')
+const Cart = require('./cart')
+const Cart_To_Product = require('./cart_to_product')
 
 /**
  * ASSOCIATIONS
@@ -18,5 +19,6 @@ module.exports = {
   User,
   Product,
   Order,
-  Review
+  Cart,
+  Cart_To_Product
 };
