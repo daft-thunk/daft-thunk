@@ -7,7 +7,7 @@ const INCREMENT = 'INCRIMENT';
 /**
  * ACTION CREATORS
  */
-export const increment = () => ({type: INCREMENT})
+export const increment = () => ({type: INCREMENT});
 
 /**
  * REDUCER

@@ -1,6 +1,6 @@
 # Daft Thunk
 *An ecommerce platform for music and apparel*
-
+- name: Daft Thunk Direkt (?)
 - put attractive user stories here
 
 ## Developer Tasks
@@ -26,7 +26,8 @@ reviews
 user_reviews_join
 cart
 cart_product_join
-associations
+categories (id, name)
+associations!!!
 
 DONE / To Review
 
