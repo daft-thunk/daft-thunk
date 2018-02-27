@@ -2,7 +2,7 @@ const _ = require('lodash');
 const faker = require('faker');
 faker.seed(199);
 
-const { Product, Category, User } = require('./server/db/models');
+const { Product, Category, User, Review } = require('./server/db/models');
 const db = require('./server/db/db');
 const Promise = require('bluebird');
 
@@ -49,6 +49,16 @@ function generateUsers() {
   return users;
 }
 
+function generateReviews() {
+  const reviews = _.times(3, () =>
+    Review.build({
+      rating: Math.floor(Math.random() * Math.floor(4.5)) + 1,
+      text: faker.lorem.paragraph(3)
+    })
+  );
+  return reviews;
+}
+
 function createProducts () {
   return Promise.map(generateProducts(), product => product.save());
 }
@@ -59,6 +69,10 @@ function createCategories () {
 
 function createUsers () {
   return Promise.map(generateUsers(), user => user.save());
+}
+
+function createReviews () {
+  return Promise.map(generateReviews(), review => review.save());
 }
 
   async function seed() {
@@ -73,6 +87,10 @@ function createUsers () {
     console.log('Seeding Users');
     await createUsers();
 
+    console.log('Seeding Reviews');
+    await createReviews();
+
+    // categories to products
     const cat1 = await Category.findOne({where: {name: 'Guitar'}});
     const cat2 = await Category.findOne({where: {name: 'Drum'}});
     const cat3 = await Category.findOne({where: {name: 'Bass'}});
@@ -85,9 +103,24 @@ function createUsers () {
     const bass1 = await Product.findById(9);
 
     await cat1.addProducts([guitar1, guitar2, guitar3]);
-
     await cat2.addProduct(drum1);
     await cat3.addProduct(bass1);
+
+    //reviews to users and products
+    const user1 = await User.findById(2);
+    const user2 = await User.findById(4);
+
+    const review1 = await Review.findById(1);
+    const review2 = await Review.findById(2);
+    const review3 = await Review.findById(3);
+
+    await user1.addReview(review1);
+    await user1.addReview(review2);
+    await user2.addReview(review3);
+
+    await guitar1.addReview(review1);
+    await guitar1.addReview(review3);
+    await drum1.addReview(review2);
 
   }
 
