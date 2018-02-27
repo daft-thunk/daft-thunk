@@ -24,10 +24,23 @@ form div {
   display: flex;
 }
 
-.flex .search {
-  flex-basis: 50%;
+.center {
+  position: absolute;
+  left: 48vw;
 }
-.flex .select {
-  flex-basis: 50%;
+
+.carousel {
+  margin-top: -14px;
+  margin-bottom: 15px;
 }
+
+.featured {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+
+
 
