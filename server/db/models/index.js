@@ -12,6 +12,7 @@ const Category = require('./category');
 
 // Review.hasOne(User);
 User.hasMany(Review);
+Review.belongsTo(User);
 
 // Review.hasOne(Product);
 Product.hasMany(Review);
