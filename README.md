@@ -1,6 +1,6 @@
 # Daft Thunk
 *An ecommerce platform for music and apparel*
-
+- name: Daft Thunk Direkt (?)
 - put attractive user stories here
 
 ## Developer Tasks
