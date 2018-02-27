@@ -6,9 +6,6 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  categories: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
   price: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
