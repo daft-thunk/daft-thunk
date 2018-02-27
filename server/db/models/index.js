@@ -1,5 +1,5 @@
 const User = require('./user')
-const Order = require('./order')
+// const Order = require('./order')
 const Product = require('./product')
 const Cart = require('./cart')
 const Cart_To_Product = require('./cart_to_product')

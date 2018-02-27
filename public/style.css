@@ -19,3 +19,15 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex .search {
+  flex-basis: 50%;
+}
+.flex .select {
+  flex-basis: 50%;
+}
+
