@@ -17,7 +17,7 @@ export function SingleProduct(props){
               <h2>{product.description}</h2>
               <h3>{product.price}</h3>
               <h4>{product.quantity}</h4>
-              <h5>{product.catagories}</h5>
+              <h5>{product.categories}</h5>
             </div>
           )
         })

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import { Menu, Icon } from 'semantic-ui-react';
+import { getProductsThunk } from '../store/products';
 
 class Navbar extends Component {
   constructor(props){
@@ -11,6 +12,10 @@ class Navbar extends Component {
     this.state = {};
   }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  componentDidMount() {
+    this.props.fetchAllProducts();
+  }
 
   render() {
     const { activeItem } = this.state;
@@ -91,6 +96,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
+    },
+    fetchAllProducts() {
+      dispatch(getProductsThunk());
     }
   };
 };
