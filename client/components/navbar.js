@@ -96,12 +96,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
-<<<<<<< HEAD
     },
     fetchAllProducts() {
       dispatch(getProductsThunk());
-=======
->>>>>>> master
     }
   };
 };
