@@ -15,7 +15,8 @@ User.hasMany(Review);
 
 Review.belongsTo(Product);
 Product.hasMany(Review);
-Product.hasMany(Category);
+
+Product.belongsToMany(Category);
 
 Cart.belongsToMany(Product, {through: Cart_To_Product});
 Product.belongsToMany(Cart, {through: Cart_To_Product});
