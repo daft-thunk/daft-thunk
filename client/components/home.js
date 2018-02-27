@@ -2,24 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Carousel, ProductCard } from './index';
 
-export default function Home(props){
+function Home(props){
   return (
     <div>
       <Carousel className="carousel"/>
-      <div className="featured">
+      {
+        props.products.length &&
+        <div className="featured">
         <div>
-          <ProductCard product={props.product} />
+          <ProductCard product={props.products[0]} />
         </div>
         <div>
-          <ProductCard product={props.product} />
+          <ProductCard product={props.products[1]} />
         </div>
         <div>
-          <ProductCard product={props.product} />
+          <ProductCard product={props.products[2]} />
         </div>
         <div>
-          <ProductCard product={props.product} />
+          <ProductCard product={props.products[3]} />
         </div>
       </div>
+      }
     </div>
   )
 }
@@ -29,3 +32,5 @@ const mapProps = state => ({
 })
 
 const Container = connect(mapProps)(Home);
+
+export default Container;
