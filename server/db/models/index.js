@@ -9,6 +9,7 @@ const Cart_To_Product = require('./cart_to_product')
  */
 
 Review.belongsTo(User);
+User.hasMany(Review);
 
 /**
  * Model exports below.
