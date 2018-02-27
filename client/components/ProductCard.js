@@ -1,26 +1,26 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
 
-const ProductCard = () => (
+const ProductCard = (props) => (
   <Card>
-    <Image src='/images/default-product.png' />
+    <Image src={props.product.imageUrl} />
     <Card.Content>
       <Card.Header>
-        Product name
+        {props.product.name}
       </Card.Header>
       <Card.Meta>
         <span>
-          Category
+          category
         </span>
       </Card.Meta>
       <Card.Description>
-        Product info
+      {props.product.description}
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
       <a>
         <Icon name='dollar' />
-        22.56
+        {props.product.price}
       </a>
     </Card.Content>
   </Card>
