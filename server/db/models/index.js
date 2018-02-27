@@ -10,8 +10,8 @@ const Category = require('./category');
  * ASSOCIATIONS
  */
 
-Review.belongsTo(User);
-User.hasMany(Review);
+// Review.belongsTo(User);
+// User.hasMany(Review);
 
 Review.belongsTo(Product);
 Product.hasMany(Review);

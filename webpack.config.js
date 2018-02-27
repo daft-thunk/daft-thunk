@@ -1,11 +1,8 @@
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
+  entry: ['babel-polyfill', './client/index.js', '@babel/polyfill'],
   mode: isDev ? 'development' : 'production',
-  entry: [
-    '@babel/polyfill', // enables async-await
-    './client/index.js'
-  ],
   output: {
     path: __dirname,
     filename: './public/bundle.js'
@@ -17,6 +14,13 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ]
       }
     ]
   }

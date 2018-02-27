@@ -24,10 +24,12 @@ form div {
   display: flex;
 }
 
-.flex .search {
-  flex-basis: 50%;
+.center {
+  position: absolute;
+  left: 47vw;
 }
-.flex .select {
-  flex-basis: 50%;
-}
+
+
+
+
 
