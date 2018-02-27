@@ -9,15 +9,15 @@ export function SingleProduct(props){
     <h1>Single Product Page</h1>
       {
         //logic to not run for now
-        props.activeProduct.map(product => {
+        1 === 11 && props.activeProduct.map(product => {
           return (
-            <div key={product.id}>
-              <img src={product.imageUrl} />
+            <div  key={product.id}>
+              <img src={product.imgUrl} />
               <h1>{product.name}</h1>
               <h2>{product.description}</h2>
               <h3>{product.price}</h3>
               <h4>{product.quantity}</h4>
-              <h5>categories go here</h5>
+              <h5>{product.categories}</h5>
             </div>
           )
         })

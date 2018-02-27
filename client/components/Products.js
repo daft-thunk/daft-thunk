@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {SearchBar, ProductSelector} from './index';
-import { SingleProduct } from './SingleProduct';
+import {SearchBar, ProductSelector, ProductCard} from './index';
 
 export function Products(props){
   return (
@@ -19,7 +18,7 @@ export function Products(props){
           return (
             <div key={product.id}>
               <h1>{product.name} - for now</h1>
-              <SingleProduct activeProduct={product} />
+              <ProductCard product={product} />
             </div>
           );
         })
