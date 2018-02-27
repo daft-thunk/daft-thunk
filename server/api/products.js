@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:productId', (req, res, next) => {
-  Product.findById(+req.params.id)
+  Product.findById(+req.params.productId)
     .then(product => res.json(product))
     .catch(next);
 });
@@ -29,7 +29,7 @@ router.get('/:productId', (req, res, next) => {
 
 // delete product - admin only
 router.delete('/:productId', (req, res, next) => {
-  Product.findById(+req.params.id)
+  Product.findById(+req.params.productId)
     .then(product => {
       return product.destroy();
     })
