@@ -39,6 +39,11 @@ form div {
   justify-content: space-around;
 }
 
+.all-products {
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 
 
 
