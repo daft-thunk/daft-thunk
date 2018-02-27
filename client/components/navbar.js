@@ -18,7 +18,7 @@ class Navbar extends Component {
     return (
       <Menu inverted={true}>
         <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick}>
-          <Link to="/">Daft Thunk </Link>
+          <Link to="/">Daft Thunk Direct</Link>
         </Menu.Item>
 
         <Menu.Item name='products' active={activeItem === 'products'} onClick={this.handleItemClick}>
