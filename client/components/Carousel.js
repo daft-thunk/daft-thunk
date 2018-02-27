@@ -9,7 +9,7 @@ class Carousel extends React.Component {
       <CarouselProvider
         currentSlide={this.props.currentSlide}
         naturalSlideWidth={100}
-        naturalSlideHeight={30}
+        naturalSlideHeight={25}
         totalSlides={3}
       >
         <Slider>

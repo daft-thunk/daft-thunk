@@ -14,4 +14,5 @@ export {default as Cart} from './cart';
 export {default as Home} from './Home';
 export {default as Carousel} from './Carousel';
 export {default as ShippingForm} from './ShippingForm';
+export {default as ProductCard} from './ProductCard';
 // export { Cart } from './Cart'
