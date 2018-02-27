@@ -8,6 +8,7 @@ const Review = require('./review');
  */
 
 Review.belongsTo(User);
+User.hasMany(Review);
 
 /**
  * Model exports below.
