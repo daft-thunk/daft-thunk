@@ -1,15 +1,20 @@
 const router = require('express').Router();
-const { Product } = require('../db/models');
+const { Product, Review, User } = require('../db/models');
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  Product.findAll()
+  Product.findAll({include: [
+    {model: Review, include: [
+      User
+    ]}
+  ]
+  })
     .then(products => res.json(products))
     .catch(next);
 });
 
 router.get('/:productId', (req, res, next) => {
-  Product.findById(+req.params.id)
+  Product.findById(+req.params.productId)
     .then(product => res.json(product))
     .catch(next);
 });
@@ -24,7 +29,7 @@ router.get('/:productId', (req, res, next) => {
 
 // delete product - admin only
 router.delete('/:productId', (req, res, next) => {
-  Product.findById(+req.params.id)
+  Product.findById(+req.params.productId)
     .then(product => {
       return product.destroy();
     })
