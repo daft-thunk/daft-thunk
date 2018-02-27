@@ -1,3 +1,40 @@
+# Daft Thunk
+*An ecommerce platform for music and apparel*
+
+- put attractive user stories here
+
+## Developer Tasks
+```
+MISC TODO
+package.json
+  No repository field.
+  change name, description
+
+eslint.json
+  "semi": [2, "always"]
+
+MODELS
+
+x product
+x user
+x order
+reviews
+  productId
+  userId (join to get user info?)
+  rating
+  text
+user_reviews_join
+cart
+cart_product_join
+associations
+
+DONE / To Review
+
+Linter fixed: npm install -g babel-eslint
+removed "prepush" from package.json
+```
+
+
 # Boilermaker
 
 *Good things come in pairs*
