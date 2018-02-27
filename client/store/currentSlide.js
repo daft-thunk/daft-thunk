@@ -2,7 +2,7 @@
 /**
  * ACTION TYPES
  */
-const INCREMENT = 'INCRIMENT';
+const INCREMENT = 'INCREMENT';
 
 /**
  * ACTION CREATORS

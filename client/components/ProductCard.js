@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 
 const ProductCard = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <Card>
       <Image src={props.product.imageUrl} />
