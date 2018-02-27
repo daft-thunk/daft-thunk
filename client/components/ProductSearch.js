@@ -1,18 +1,18 @@
-import _ from 'lodash'
-import faker from 'faker'
-import React, { Component } from 'react'
-import { Search, Grid, Header } from 'semantic-ui-react'
+import _ from 'lodash';
+import faker from 'faker';
+import React, { Component } from 'react';
+import { Search, Grid, Header } from 'semantic-ui-react';
 
 const source = _.times(5, () => ({
   title: faker.company.companyName(),
   description: faker.company.catchPhrase(),
   image: faker.internet.avatar(),
   price: faker.finance.amount(0, 100, 2, '$'),
-}))
+}));
 
 export default class SearchExampleStandard extends Component {
   componentWillMount() {
-    this.resetComponent()
+    this.resetComponent();
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -20,23 +20,23 @@ export default class SearchExampleStandard extends Component {
   handleResultSelect = (e, { result }) => this.setState({ value: result.title })
 
   handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
+    this.setState({ isLoading: true, value });
 
     setTimeout(() => {
-      if (this.state.value.length < 1) return this.resetComponent()
+      if (this.state.value.length < 1) return this.resetComponent();
 
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
+      const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
+      const isMatch = result => re.test(result.title);
 
       this.setState({
         isLoading: false,
         results: _.filter(source, isMatch),
-      })
-    }, 500)
+      });
+    }, 500);
   }
 
   render() {
-    const { isLoading, value, results } = this.state
+    const { isLoading, value, results } = this.state;
 
     return (
       <Grid>
@@ -51,6 +51,6 @@ export default class SearchExampleStandard extends Component {
           />
         </Grid.Column>
       </Grid>
-    )
+    );
   }
 }

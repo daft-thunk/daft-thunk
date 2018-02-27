@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {SearchBar, ProductSelector} from './index'
-
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {SearchBar, ProductSelector} from './index';
+import { SingleProduct } from './SingleProduct';
 
 export function Products(props){
   return (
@@ -15,21 +15,26 @@ export function Products(props){
     </div>
       {
         //logic to not run for now
-        1 === 11 && props.products.map(product => {
+        props.products.map(product => {
           return (
-            <h1 key={product.id}>{product.name}</h1>
-          )
+            <div key={product.id}>
+              <h1>{product.name} - for now</h1>
+              <SingleProduct activeProduct={product} />
+            </div>
+          );
         })
       }
     </div>
-  )
+  );
 }
 
 const mapProps = state => ({
   products: state.products
-})
+});
 
-const Container = connect(mapProps)(Products)
+const mapDispatch = null;
 
-export default Container
+const Container = connect(mapProps, mapDispatch)(Products);
+
+export default Container;
 
