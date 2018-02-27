@@ -11,7 +11,7 @@ package.json
   change name, description
 
 eslint.json
-  "semi": [2, "always"]
+  "semi": [1, "always"]
 
 MODELS
 
