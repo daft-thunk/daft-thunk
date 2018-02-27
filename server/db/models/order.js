@@ -12,7 +12,16 @@ const Order = db.define('order', {
     defaultValue: Date.now()
   },
   dateShipped: Sequelize.DATE,
-  dateArrived: Sequelize.DATE
+  dateArrived: Sequelize.DATE,
+  mailingAddress: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    isEmail: true
+  }
 });
 
 // instance method
