@@ -5,7 +5,13 @@ import CartProductSegment from './CartProductSegment';
 
 export function Cart(props){
 
-  // get static cart for testing
+  // add up cost for cart
+  function reducer (acc, curProduct) {
+    let price = curProduct.price * curProduct.cart_to_product.quantity;
+    return acc + price;
+  }
+
+  if (props.cart.products !== undefined) console.log(props.cart.products.reduce(reducer));
 
   return (
     <div>
