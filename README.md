@@ -5,6 +5,18 @@
 
 ## Developer Tasks
 ```
+MEETING NOTES feb 28
+roles table. default: user. can be admin.
+orders - price charged, not what's in db (if changed)
+keep cart: user changes to logging in
+  - user object returned
+front end: cookies: store a crypto hash on cart model
+  we have to manage cookie info
+back end: session
+  - if cart cookies match, merge two carts
+associations: use 'as: categories'
+user model - scope: exclude sensitive data
+
 MISC TODO
 package.json
   No repository field.
