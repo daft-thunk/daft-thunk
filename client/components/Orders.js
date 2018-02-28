@@ -6,7 +6,7 @@ import { getOrdersThunk } from '../store/orders';
 import store from '../store';
 // import { ProductSearch, ProductSelector, ProductCard } from './index';
 
-export class Orders extends Component {
+class Orders extends Component {
   componentDidMount() {
     // console.log(this.props);
     // this.props.fetchOrders();
