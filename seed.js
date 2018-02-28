@@ -186,10 +186,11 @@ async function seed() {
   await drum1.addReview(review2);
 
   // products to Carts
-  const cart1 = Cart.findById(1);
-  const cart2 = Cart.findById(2);
-  await cart.addProduct(guitar1);
-  await cart.addProduct(drum1);
+  const cart1 = await Cart.findById(1);
+  const cart2 = await Cart.findById(2);
+  await cart1.addProduct(guitar1.id);
+  await cart2.addProduct(drum1.id);
+  // console.log(cart1);
 }
 
 seed()
