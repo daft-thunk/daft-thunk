@@ -1,10 +1,11 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Button, Card, Icon, Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
 
 const ProductCard = (props) => {
-  // console.log(props);
+  // TODO set up onclick for add to cart
   return (
-    <Card>
+    <Card link as={Link} to={`/products/${props.product.id}`}>
       <Image src={props.product.imageUrl} />
       <Card.Content>
         <Card.Header>
@@ -20,10 +21,14 @@ const ProductCard = (props) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a>
           <Icon name="dollar" />
           {props.product.price}
-        </a>
+          <Button fluid animated='vertical'>
+      <Button.Content hidden>Add to Cart</Button.Content>
+      <Button.Content visible>
+        <Icon name='shop' />
+      </Button.Content>
+    </Button>
       </Card.Content>
     </Card>
   );
