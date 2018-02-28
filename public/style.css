@@ -44,10 +44,39 @@ form div {
   flex-wrap: wrap;
 }
 
+#singleProductContainer h1{
+  text-align: center;
+}
+
+.singleProductflex {
+  display: flex;
+  justify-content: center;
+}
+
+.singleProductflex div{
+  flex-basis: 40%;
+  height: 400px;
+}
+
+.singleProductflex div img{
+  height: 100%;
+}
+
+.productInfo{
+  display: flex;
+  flex-direction: column;
+}
+
+.productButton {
+  height: 50px;
+  align-self: flex-end;
+}
+
 .cart {
   justify-content: space-between;
   align-items: center;
 }
+
 .cart a {
   font-size: 2em;
 }
@@ -57,6 +86,7 @@ form div {
   width: auto;
   margin-left: 15px;
 }
+
 
 .cart-price {
   font-size: 1.5em;
