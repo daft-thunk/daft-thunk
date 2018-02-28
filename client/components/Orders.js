@@ -15,7 +15,7 @@ class Orders extends Component {
 
   render() {
     let userOrders = this.props.orders ? this.props.orders : [];
-    console.log(userOrders, this.props);
+    // console.log(userOrders, this.props);
     if (this.props.userId) {
       // NOT a secure way to filter...
       const userId = this.props.userId;
