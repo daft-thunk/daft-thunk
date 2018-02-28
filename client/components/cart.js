@@ -7,7 +7,6 @@ export function Cart(props){
 
   // get static cart for testing
 
-
   return (
     <div>
       <h1>Cart</h1>
