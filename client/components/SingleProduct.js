@@ -1,35 +1,60 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import { history } from '../history';
+import store, { setProductThunk } from '../store';
+import { Icon, Button } from 'semantic-ui-react'
 
-export function SingleProduct(props){
-  return (
-    <div>
-    <h1>Single Product Page</h1>
-      {
-        //logic to not run for now
-        1 === 11 && props.activeProduct.map(product => {
-          return (
-            <div  key={product.id}>
-              <img src={product.imgUrl} />
-              <h1>{product.name}</h1>
-              <h2>{product.description}</h2>
-              <h3>{product.price}</h3>
-              <h4>{product.quantity}</h4>
-              <h5>{product.categories}</h5>
-            </div>
+class SingleProduct extends Component{
+
+  componentWillMount(){
+    store.dispatch(setProductThunk(this.props.match.params.id));
+  }
+
+  render(){
+    return (
+      <div id="singleProductContainer">
+        <h1>{this.props.product.name}</h1>
+        <hr width="75%" />
+        <div className="singleProductflex">
+          <div><img src={this.props.product.imageUrl} /></div>
+          <div className="productInfo">
+          <h1><Icon name="dollar" />{this.props.product.price}</h1>
+          <h3>{this.props.product.description}</h3>
+          <h3>Manufacturer: {this.props.product.manufacturer}</h3>
+          <Button className="productButton" fluid animated="vertical">
+            <Button.Content hidden>Add to Cart</Button.Content>
+              <Button.Content visible>
+              <Icon name="shop" />
+            </Button.Content>
+           </Button>
+          </div>
+        </div>
+        <hr width="75%" />
+        <h1>Reviews</h1>
+        {
+          this.props.product.reviews && this.props.product.reviews.map(review => {
+            let stars = String.fromCharCode(9733).repeat(review.rating);
+            return (
+              <div key={review.id}>
+                <h2>{review.user.fullName}</h2>
+                <h2>{stars}</h2>
+                <h3>{review.text}</h3>
+                <hr width="50%" />
+              </div>
+              );
+            }
           )
-        })
-      }
-    </div>
-  )
+        }
+      </div>
+    );
+  }
 }
 
 const mapProps = state => ({
-  products: state.activeProduct
-})
+  product: state.activeProduct
+});
 
-const Container = connect(mapProps)(SingleProduct)
+const Container = connect(mapProps)(SingleProduct);
 
-export default Container
+export default Container;
+

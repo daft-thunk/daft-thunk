@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-export default class DemoCarousel extends Component {
+//Currently using this carousel
+export default class altCarousel extends Component {
   render() {
       return (
           <Carousel  showThumbs={false} showStatus={false} infiniteLoop={true} autoPlay={true} interval={5000} transitionTime={500}>
