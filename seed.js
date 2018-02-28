@@ -7,7 +7,8 @@ const {
   Category,
   User,
   Review,
-  Order
+  Order,
+  Cart
 } = require('./server/db/models');
 const db = require('./server/db/db');
 const Promise = require('bluebird');
@@ -45,8 +46,9 @@ function generateCategories() {
 }
 
 function generateUsers() {
-  // build the non-random test user
-  const testUser = User.build(testUserData);
+  // build and save the non-random test user
+  const testUser = User.create(testUserData);
+
   const randomUsers = _.times(4, () =>
     User.build({
       firstName: faker.name.firstName(),
@@ -71,6 +73,19 @@ function generateReviews() {
 }
 
 function generateOrders() {
+  const testUserOrders = ['Created', 'Processing', 'Cancelled', 'Completed', 'Completed'].map(
+    status => {
+      return Order.build({
+        status,
+        dateOrdered: Date.now(),
+        mailingAddress: testUserData.mailingAddress,
+        email: testUserData.email,
+        userId: 1,
+        cartId: 1
+      });
+    }
+  );
+
   const randomOrders = ['Created', 'Processing', 'Cancelled', 'Completed'].map(
     status => {
       return Order.build({
@@ -82,17 +97,6 @@ function generateOrders() {
     }
   );
 
-  const testUserOrders = ['Created', 'Processing', 'Cancelled', 'Completed', 'Completed'].map(
-    status => {
-      return Order.build({
-        status,
-        dateOrdered: Date.now(),
-        mailingAddress: testUserData.mailingAddress,
-        email: testUserData.email,
-        userId: 1
-      });
-    }
-  );
   return [...testUserOrders, ...randomOrders];
 }
 
@@ -130,6 +134,10 @@ async function seed() {
 
   console.log('Seeding Reviews');
   await createReviews();
+
+  // note - this creates one cart for test user
+  console.log('Seeding Cart');
+  await Cart.create();
 
   console.log('Seeding Orders');
   await createOrders();
