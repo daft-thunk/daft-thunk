@@ -24,7 +24,7 @@ Category.belongsToMany(Product, {through: 'product_to_category'});
 Cart.belongsToMany(Product, {through: Cart_To_Product});
 Product.belongsToMany(Cart, {through: Cart_To_Product});
 
-Order.hasOne(Cart);
+Order.belongsTo(Cart);
 Order.belongsTo(User);
 
 /**
