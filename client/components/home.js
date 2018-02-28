@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Carousel, ProductCard, AltCarousel, OrderForm } from './index';
+import { Carousel, ProductCard, AltCarousel } from './index';
 // <Carousel className="carousel"/>
 
 function Home(props){
@@ -26,7 +26,6 @@ function Home(props){
         </div>
       </div>
       }
-      <OrderForm />
     </div>
   )
 }
