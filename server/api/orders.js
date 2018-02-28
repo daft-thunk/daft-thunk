@@ -1,9 +1,11 @@
 const router = require('express').Router();
-const { Order } = require('../db/models');
+const { Order, Cart, User } = require('../db/models');
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-  Order.findAll()
+  Order.findAll({
+    include: [Cart, { model: User, attributes: ['id', 'firstName', 'lastName'] }]
+  })
     .then(orders => res.json(orders))
     .catch(next);
 });
@@ -16,6 +18,6 @@ router.get('/:orderId', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   Order.create(req.body)
-  .then(order => res.status(201).json(order))
-  .catch(next);
+    .then(order => res.status(201).json(order))
+    .catch(next);
 });
