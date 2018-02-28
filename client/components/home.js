@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Carousel, ProductCard } from './index';
+import { Carousel, ProductCard, ShippingForm } from './index';
 
 function Home(props){
   return (
@@ -23,6 +23,7 @@ function Home(props){
         </div>
       </div>
       }
+      <ShippingForm />
     </div>
   )
 }

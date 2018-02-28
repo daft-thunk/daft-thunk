@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addShippingAddress } from '../store';
+import { addOrder } from '../store';
 import { Button, Form } from 'semantic-ui-react';
 
 /**
@@ -19,6 +19,10 @@ class ShippingForm extends Component {
     return (
       <div>
         <Form onSubmit={handleSubmit} >
+          <Form.Field label="email">
+            <label htmlFor="email"><small>email</small></label>
+            <input name="email" type="text" />
+          </Form.Field>
           <Form.Field>
             <label htmlFor="Address"><small>Address</small></label>
             <input name="Address" type="text" />
@@ -42,41 +46,43 @@ class ShippingForm extends Component {
   }
 }
 
-  /**
-   * CONTAINER
-   *   Note that we have two different sets of 'mapStateToProps' functions -
-   *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
-   *   function, and share the same Component. This is a good example of how we
-   *   can stay DRY with interfaces that are very similar to each other!
-   */
+/**
+ * CONTAINER
+ *   Note that we have two different sets of 'mapStateToProps' functions -
+ *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
+ *   function, and share the same Component. This is a good example of how we
+ *   can stay DRY with interfaces that are very similar to each other!
+ */
 
-  const mapState = (state) => {
-    return {
+const mapState = (state) => {
+  return {
 
-    };
   };
+};
 
-  const mapDispatch = (dispatch) => {
-    return {
-      handleSubmit(evt) {
-        evt.preventDefault();
-        const address = evt.target.address.value;
-        const city = evt.target.city.value;
-        const state = evt.target.state.value;
-        const zip = evt.target.zip.value;
-        dispatch(addShippingAddress(address, city, state, zip));
-      }
-    };
+const mapDispatch = (dispatch) => {
+  return {
+    handleSubmit(evt, data) {
+      console.log(data)
+      evt.preventDefault();
+      const email = evt.target.email.value;
+      const address = evt.target.address.value;
+      const city = evt.target.city.value;
+      const state = evt.target.state.value;
+      const zip = evt.target.zip.value;
+      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
+    }
   };
+};
 
-  export default connect(mapState, mapDispatch)(ShippingForm);
+export default connect(mapState, mapDispatch)(ShippingForm);
 
-  /**
-   * PROP TYPES
-   */
-  ShippingForm.propTypes = {
-    address: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-    zip: PropTypes.string.isRequired
-  };
+/**
+ * PROP TYPES
+ */
+ShippingForm.propTypes = {
+  address: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  zip: PropTypes.string.isRequired
+};
