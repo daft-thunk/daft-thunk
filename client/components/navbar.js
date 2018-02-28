@@ -22,35 +22,35 @@ class Navbar extends Component {
 
     return (
       <Menu inverted={true}>
-        <Menu.Item name="home" active={activeItem === 'home'} onClick={this.handleItemClick}>
-          <Link to="/">Daft Thunk Direct</Link>
+      <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick}>
+          Daft Thunk Direct
         </Menu.Item>
 
-        <Menu.Item name="products" active={activeItem === 'products'} onClick={this.handleItemClick}>
-          <Link to="/products">Products</Link>
+        <Menu.Item as={Link} to="/products" name="products" active={activeItem === 'products'} onClick={this.handleItemClick}>
+          Products
         </Menu.Item>
 
-        <Menu.Item name="cart" active={activeItem === 'cart'} onClick={this.handleItemClick}>
+        <Menu.Item as={Link} to="/cart" name="cart" active={activeItem === 'cart'} onClick={this.handleItemClick}>
           <Icon name="cart" />
-          <Link to="/cart">Cart</Link>
+          Cart
         </Menu.Item>
         <Menu.Menu position="right">
 
         {!this.props.isLoggedIn &&
-          <Menu.Item name="signup" active={activeItem === 'signup'} onClick={this.handleItemClick}>
-            <Link to="/signup">Sign Up</Link>
+          <Menu.Item as={Link} to="/signup" name="signup" active={activeItem === 'signup'} onClick={this.handleItemClick}>
+            Sign Up
           </Menu.Item>
         }
 
         {!this.props.isLoggedIn &&
-          <Menu.Item name="login" active={activeItem === 'login'} onClick={this.handleItemClick}>
-            <Link to="/login">Login</Link>
+          <Menu.Item as={Link} to="/login" name="login" active={activeItem === 'login'} onClick={this.handleItemClick}>
+            Login
           </Menu.Item>
         }
 
         {this.props.isLoggedIn &&
-        <Menu.Item name="logout" active={activeItem === 'logout'} onClick={this.props.handleClick}>
-          <Link to="/logout">Logout</Link>
+        <Menu.Item as={Link} to="/login" name="logout" active={activeItem === 'logout'} onClick={this.props.handleClick}>
+          Logout
         </Menu.Item>
         }
         </Menu.Menu>

@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Carousel, ProductCard } from './index';
+import { Carousel, ProductCard, AltCarousel } from './index';
+// <Carousel className="carousel"/>
 
 function Home(props){
   return (
     <div>
-      <Carousel className="carousel"/>
+      <div className="altcarousel">
+        <AltCarousel />
+      </div>
       {
         props.products.length &&
         <div className="featured">
