@@ -45,7 +45,9 @@ function generateCategories() {
 }
 
 function generateUsers() {
-  const users = _.times(4, () =>
+  // build the non-random test user
+  const testUser = User.build(testUserData);
+  const randomUsers = _.times(4, () =>
     User.build({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -55,10 +57,7 @@ function generateUsers() {
       mailingAddress: `${faker.address.streetAddress()}\n${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`
     })
   );
-  // build the non-random test user
-  const testUser = User.build(testUserData);
-  users.push(testUser);
-  return users;
+  return [testUser, ...randomUsers];
 }
 
 function generateReviews() {
@@ -72,24 +71,25 @@ function generateReviews() {
 }
 
 function generateOrders() {
-  const testUserOrders = ['Created', 'Processing', 'Cancelled', 'Completed'].map(
+  const randomOrders = ['Created', 'Processing', 'Cancelled', 'Completed'].map(
     status => {
       return Order.build({
         status,
         dateOrdered: Date.now(),
         mailingAddress: `${faker.address.streetAddress()}\n${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`,
-        email: faker.internet.email()
+        email: faker.internet.email(),
       });
     }
   );
 
-  const randomOrders = ['Created', 'Processing', 'Cancelled', 'Completed', 'Completed'].map(
+  const testUserOrders = ['Created', 'Processing', 'Cancelled', 'Completed', 'Completed'].map(
     status => {
       return Order.build({
         status,
         dateOrdered: Date.now(),
         mailingAddress: testUserData.mailingAddress,
-        email: testUserData.email
+        email: testUserData.email,
+        userId: 1
       });
     }
   );
