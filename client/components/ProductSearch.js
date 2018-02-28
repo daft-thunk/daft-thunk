@@ -2,7 +2,9 @@ import _ from 'lodash';
 import faker from 'faker';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Search, Grid, Header } from 'semantic-ui-react';
+import Icon, { Search, Grid, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
+import history from '../history'
 
 // change source to this.props.products
 // const source = _.times(5, () => ({
@@ -23,7 +25,7 @@ class ProductSearch extends Component {
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.name })
+  handleResultSelect = (e, { result }) => history.push(`/products/${result.key}`)
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
@@ -33,7 +35,6 @@ class ProductSearch extends Component {
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
       const isMatch = result => re.test(result.name);
-      console.log('state!!!', this.state.value)
       this.setState({
         isLoading: false,
         results: _.filter(this.props.products, isMatch)
@@ -43,8 +44,12 @@ class ProductSearch extends Component {
 
   render() {
     const { isLoading, value, results } = this.state;
-    // const {products} = this.props
-    // console.log('>>>products',products, this.props)
+    results.map(result => {
+      result.key = result.id;
+      result.title = result.name;
+      result.image = result.imageUrl;
+      result.description = String.fromCharCode(9733).repeat(result.reviews.length ? result.reviews[0].rating : 0);
+    })
     return (
       <Grid>
         <Grid.Column width={8}>
@@ -54,7 +59,6 @@ class ProductSearch extends Component {
             onSearchChange={this.handleSearchChange}
             results={results}
             value={value}
-            title={name}
           />
         </Grid.Column>
       </Grid>
@@ -67,7 +71,7 @@ const mapProps = state => ({
 });
 
 const mapDispatch = null;
-
+// {id: results.id, title: results.name, description: results.description, image: results.imageUrl, price: results.price}
 const Container = connect(mapProps)(ProductSearch);
 
 export default Container;

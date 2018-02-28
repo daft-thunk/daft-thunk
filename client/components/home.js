@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Carousel, ProductCard, ShippingForm } from './index';
+import { Carousel, ProductCard, AltCarousel, OrderForm } from './index';
+// <Carousel className="carousel"/>
 
 function Home(props){
   return (
     <div>
-      <Carousel className="carousel"/>
+      <div className="altcarousel">
+        <AltCarousel />
+      </div>
       {
         props.products.length &&
         <div className="featured">
@@ -23,7 +26,7 @@ function Home(props){
         </div>
       </div>
       }
-      <ShippingForm />
+      <OrderForm />
     </div>
   )
 }

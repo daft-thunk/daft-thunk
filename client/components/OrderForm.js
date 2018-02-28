@@ -7,7 +7,7 @@ import { Button, Form } from 'semantic-ui-react';
 /**
  * COMPONENT
  */
-class ShippingForm extends Component {
+class OrderForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -75,7 +75,7 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(ShippingForm);
+export default connect(mapState, mapDispatch)(OrderForm);
 
 /**
  * PROP TYPES
