@@ -3,6 +3,7 @@ import axios from 'axios';
 const SET_CART = 'SET_CART';
 
 const setCart = cart => ({type: SET_CART, cart});
+// const addOneToCart = product
 
 export const fetchCart = cartId => dispatch => {
   axios.get(`/api/cart/${cartId}`)
@@ -19,3 +20,4 @@ export default function(state = {}, action) {
       return state;
   }
 }
+
