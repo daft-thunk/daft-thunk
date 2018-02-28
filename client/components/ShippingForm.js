@@ -11,33 +11,39 @@ class ShippingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value });
+  }
+
   render() {
 
     const { handleSubmit } = this.props;
 
     return (
       <div>
-        <Form onSubmit={handleSubmit} >
-          <Form.Field label="email">
-            <label htmlFor="email"><small>email</small></label>
-            <input name="email" type="text" />
+        <Form onSubmit={() => handleSubmit(event, this.state)}>
+          <Form.Field>
+            <label>email</label>
+            <input placeholder="email" name="email" onChange={this.handleChange} />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="Address"><small>Address</small></label>
-            <input name="Address" type="text" />
+            <label>Address</label>
+            <input placeholder="Address" name="address" onChange={this.handleChange} />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="city"><small>City</small></label>
-            <input name="city" type="text" />
+            <label>City</label>
+            <input placeholder="City" name="city" onChange={this.handleChange} />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="State"><small>State</small></label>
-            <input name="State" type="text" />
+            <label>State</label>
+            <input placeholder="State" name="state" onChange={this.handleChange} />
           </Form.Field>
           <Form.Field>
-            <label htmlFor="ZIP"><small>ZIP</small></label>
-            <input name="ZIP" type="text" />
+            <label>ZIP</label>
+            <input placeholder="ZIP" name="zip" onChange={this.handleChange} />
           </Form.Field>
           <Button type="submit">Contiune</Button>
         </Form>
@@ -62,15 +68,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(evt, data) {
-      console.log(data)
-      evt.preventDefault();
-      const email = evt.target.email.value;
-      const address = evt.target.address.value;
-      const city = evt.target.city.value;
-      const state = evt.target.state.value;
-      const zip = evt.target.zip.value;
-      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
+    handleSubmit(evt, localState) {
+      const { email, address, city, state, zip } = localState;
+     dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
     }
   };
 };
@@ -80,9 +80,9 @@ export default connect(mapState, mapDispatch)(ShippingForm);
 /**
  * PROP TYPES
  */
-ShippingForm.propTypes = {
-  address: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  state: PropTypes.string.isRequired,
-  zip: PropTypes.string.isRequired
-};
+// ShippingForm.propTypes = {
+//   address: PropTypes.string.isRequired,
+//   city: PropTypes.string.isRequired,
+//   state: PropTypes.string.isRequired,
+//   zip: PropTypes.string.isRequired
+// };
