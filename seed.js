@@ -7,7 +7,8 @@ const {
   Category,
   User,
   Review,
-  Order
+  Order,
+  Cart
 } = require('./server/db/models');
 const db = require('./server/db/db');
 const Promise = require('bluebird');
@@ -96,6 +97,10 @@ function generateOrders() {
   return [...testUserOrders, ...randomOrders];
 }
 
+function generateCarts() {
+  return _.times(3, () => Cart.build({}))
+}
+
 function createProducts() {
   return Promise.map(generateProducts(), product => product.save());
 }
@@ -116,6 +121,10 @@ function createOrders() {
   return Promise.map(generateOrders(), order => order.save());
 }
 
+function createCarts() {
+  return Promise.map(generateCarts(), cart => cart.save());
+}
+
 async function seed() {
   await db.sync({ force: true });
 
@@ -133,6 +142,9 @@ async function seed() {
 
   console.log('Seeding Orders');
   await createOrders();
+
+  console.log('Seeding Carts');
+  await createCarts();
 
   // categories to products
   const cat1 = await Category.findOne({ where: { name: 'Guitar' } });
@@ -165,6 +177,12 @@ async function seed() {
   await guitar1.addReview(review1);
   await guitar1.addReview(review3);
   await drum1.addReview(review2);
+
+  // products to Carts
+  const cart1 = Cart.findById(1);
+  const cart2 = Cart.findById(2);
+  await cart.addProduct(guitar1);
+  a
 }
 
 seed()
