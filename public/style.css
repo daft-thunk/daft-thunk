@@ -29,7 +29,7 @@ form div {
   left: 48vw;
 }
 
-.carousel {
+.altcarousel {
   margin-top: -14px;
   margin-bottom: 15px;
 }
@@ -43,8 +43,6 @@ form div {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-
-
 
 
 

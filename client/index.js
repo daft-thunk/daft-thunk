@@ -19,7 +19,3 @@ ReactDOM.render(
   document.getElementById('app')
 );
 
-setInterval(() => {
-  console.log('firing')
-  store.dispatch(increment())
-}, 10000);
