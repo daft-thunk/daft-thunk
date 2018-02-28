@@ -7,24 +7,17 @@ import { setProduct } from '../store';
 const ProductCard = (props) => {
   // TODO set up onclick for add to cart
   return (
-    <Card onClick={props.handleClick} link as={Link} to={`/products/${props.product.id}`}>
+    <Card>
       <Image src={props.product.imageUrl} />
       <Card.Content>
         <Card.Header>
           {props.product.name}
         </Card.Header>
-        <Card.Meta>
-          <span>
-            category n/a
-          </span>
-        </Card.Meta>
-        <Card.Description>
-        {props.product.description}
-        </Card.Description>
       </Card.Content>
       <Card.Content extra>
           <Icon name="dollar" />
           {props.product.price}
+          <Button onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
           <Button fluid animated="vertical">
       <Button.Content hidden>Add to Cart</Button.Content>
       <Button.Content visible>
