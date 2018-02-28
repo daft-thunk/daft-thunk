@@ -182,7 +182,7 @@ async function seed() {
   const cart1 = Cart.findById(1);
   const cart2 = Cart.findById(2);
   await cart.addProduct(guitar1);
-  a
+  await cart.addProduct(drum1);
 }
 
 seed()
