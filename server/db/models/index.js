@@ -12,6 +12,7 @@ const Category = require('./category');
 
 // Review.hasOne(User);
 User.hasMany(Review);
+User.hasMany(Order);
 Review.belongsTo(User);
 
 // Review.hasOne(Product);
@@ -24,6 +25,7 @@ Cart.belongsToMany(Product, {through: Cart_To_Product});
 Product.belongsToMany(Cart, {through: Cart_To_Product});
 
 Order.hasOne(Cart);
+Order.belongsTo(User);
 
 /**
  * Model exports below.

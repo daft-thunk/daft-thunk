@@ -32,17 +32,16 @@ const User = db.define('user', {
   },
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-  fullName: {
-    type: Sequelize.VIRTUAL,
-    get() {
-      return (
-        this.getDataValue('firstName') + ' ' + this.getDataValue('lastName')
-      );
-    }
-  },
+
   passwordUpdateDate: {
     type: Sequelize.DATE,
     defaultValue: Date.now()
+  }
+}, {
+  getterMethods: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName
+    }
   }
 });
 
