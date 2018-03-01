@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setProduct } from '../store';
+import { setProduct, addProductToCart } from '../store';
 
 const ProductCard = (props) => {
   // TODO set up onclick for add to cart
@@ -19,7 +19,7 @@ const ProductCard = (props) => {
           {props.product.price}
           <Button onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
           <Button fluid animated="vertical">
-      <Button.Content hidden>Add to Cart</Button.Content>
+      <Button.Content onClick={() => props.handleAddToCart(props.cartId, props.product.id)} hidden>Add to Cart</Button.Content>
       <Button.Content visible>
         <Icon name="shop" />
       </Button.Content>
@@ -29,11 +29,17 @@ const ProductCard = (props) => {
   );
 };
 
-const mapProps = () => ({});
+const mapProps = (state) => ({
+  cartId: state.cart.id
+});
 
 const mapDispatch = (dispatch, ownProps) => ({
   handleClick(){
     dispatch(setProduct(ownProps.product));
+  },
+  handleAddToCart(cartId, productId) {
+    console.log(cartId)
+    dispatch(addProductToCart(cartId, { productId } ));
   }
 });
 
