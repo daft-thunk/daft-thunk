@@ -27,12 +27,12 @@ function Home(props){
       </div>
       }
     </div>
-  )
+  );
 }
 
 const mapProps = state => ({
-  products: state.products
-})
+  products: state.products.allProducts
+});
 
 const Container = connect(mapProps)(Home);
 
