@@ -16,4 +16,5 @@ export {default as OrderForm} from './OrderForm';
 export {default as ProductCard} from './ProductCard';
 export {default as AltCarousel} from './AltCarousel';
 export {default as Orders} from './Orders';
+export {default as Review} from './Review';
 // export { Cart } from './Cart'
