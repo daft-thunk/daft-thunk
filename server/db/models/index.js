@@ -27,6 +27,7 @@ Product.belongsToMany(Cart, {through: Cart_To_Product});
 Order.belongsTo(Cart);
 Order.belongsTo(User);
 
+
 /**
  * Model exports below.
  * USAGE: const {User} = require('../db/models')

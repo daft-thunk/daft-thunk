@@ -20,6 +20,10 @@ form div {
   display: inline-block;
 }
 
+.site-container {
+  padding: 0 8px;
+}
+
 .flex {
   display: flex;
 }

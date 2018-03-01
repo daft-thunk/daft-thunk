@@ -21,6 +21,9 @@ const Order = db.define('order', {
     type: Sequelize.STRING,
     allowNull: false,
     isEmail: true
+  },
+  purchasedCart: {
+    type: Sequelize.JSON
   }
 });
 

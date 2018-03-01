@@ -24,7 +24,7 @@ class OrderForm extends Component {
 
     return (
       <div>
-        <Form onSubmit={() => handleSubmit(event, this.state)}>
+        <Form onSubmit={() => handleSubmit(event, this.state, this.props.cart)}>
           <Form.Field>
             <label>email</label>
             <input placeholder="email" name="email" onChange={this.handleChange} />
@@ -45,7 +45,7 @@ class OrderForm extends Component {
             <label>ZIP</label>
             <input placeholder="ZIP" name="zip" onChange={this.handleChange} />
           </Form.Field>
-          <Button type="submit">Contiune</Button>
+          <Button type="submit">Continue</Button>
         </Form>
       </div>
     );
@@ -62,15 +62,15 @@ class OrderForm extends Component {
 
 const mapState = (state) => {
   return {
-
+      cart: state.cart
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(evt, localState) {
+    handleSubmit(evt, localState, cart) {
       const { email, address, city, state, zip } = localState;
-     dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
+     dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedcart: cart }));
     }
   };
 };
