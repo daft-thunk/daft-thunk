@@ -3,11 +3,13 @@ import axios from 'axios';
  * ACTION TYPES
  */
 const INIT_PRODUCTS = 'INIT PRODUCTS';
+const FILTER_PRODUCTS = 'FILTER PRODUCTS';
 
 /**
  * ACTION CREATORS
  */
-const initProducts = (products) => ({type: INIT_PRODUCTS, products});
+export const initProducts = (products) => ({type: INIT_PRODUCTS, products});
+export const filterProducts = (id) => ({type: FILTER_PRODUCTS, id});
 
 /**
  * THUNK CREATORS
@@ -22,10 +24,15 @@ export const getProductsThunk = () =>
 /**
  * REDUCER
  */
-export default function (state = [], action) {
+export default function (state = {allProducts: [], filteredProducts: []}, action) {
   switch (action.type) {
     case INIT_PRODUCTS:
-      return action.products;
+      return {allProducts: action.products, filteredProducts: action.products};
+    case FILTER_PRODUCTS:
+      if (action.id === 'showAll') {
+        return {...state, filteredProducts: state.allProducts};
+      }
+      return {...state, filteredProducts: state.allProducts.filter(product => product.categories[0] && product.categories[0].id === action.id)};
     default:
       return state;
   }

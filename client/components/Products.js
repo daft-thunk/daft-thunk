@@ -27,7 +27,7 @@ export function Products(props) {
 }
 
 const mapProps = state => ({
-  products: state.products
+  products: state.products.filteredProducts
 });
 
 const mapDispatch = null;
