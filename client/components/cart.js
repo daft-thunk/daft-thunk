@@ -11,6 +11,7 @@ class Cart extends Component {
     this.state = {};
 
     this.addOneToQuanity = this.addOneToQuanity.bind(this);
+    this.removeOneFromQuanity = this.removeOneFromQuanity.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +22,14 @@ class Cart extends Component {
   addOneToQuanity (event, quantity, productId) {
     event.preventDefault();
     quantity++;
+    axios.put(`/api/cart/${this.props.cart.id}`, {productId, quantity})
+    .then(console.log)
+    .catch(console.error);
+  }
+
+  removeOneFromQuanity (event, quantity, productId) {
+    event.preventDefault();
+    quantity--;
     axios.put(`/api/cart/${this.props.cart.id}`, {productId, quantity})
     .then(console.log)
     .catch(console.error);
@@ -40,7 +49,7 @@ class Cart extends Component {
         <h1>Cart</h1>
         {
           this.props.cart.products !== undefined ? (
-            this.props.cart.products.map(product => <CartProductSegment key={product.id} product={product} addOne={this.addOneToQuanity} />)
+            this.props.cart.products.map(product => <CartProductSegment key={product.id} product={product} addOne={this.addOneToQuanity} removeOne={this.removeOneFromQuanity} />)
           ) : <h2>Cart is Empty</h2>
         }
         <div className="total">

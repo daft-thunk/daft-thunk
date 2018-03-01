@@ -7,18 +7,25 @@ class CartProductSegment extends Component {
     super();
 
     this.state = {
-      quantity: 0
+      quantity: 0,
+      plusClass: 'ui button',
+      minusClass: 'ui button'
     };
   }
 
   componentDidMount() {
+    const quantity = this.props.product.cart_to_product.quantity;
+    const plusClass = quantity >= this.props.product.stock ? 'ui disabled button' : 'ui button';
+    const minusClass = quantity === 1 ? 'ui disabled button' : 'ui button';
+
     this.setState({
-      quantity: this.props.product.cart_to_product.quantity});
+      quantity,
+      plusClass,
+      minusClass
+    });
   }
 
   render() {
-    // TODO set up onclick for add to cart
-    console.log('quantity ', this.state.quantity)
     return (
       <Segment vertical className="cart flex">
         <Image src={this.props.product.imageUrl} />
@@ -35,13 +42,21 @@ class CartProductSegment extends Component {
           </div>
           <div className="ui buttons">
             <button
-className="ui button" onClick={(event) => {
-              this.props.addOne(event, this.state.quantity, this.props.product.id);
-              this.setState({quantity: this.state.quantity + 1});
-            }} >
+              className={this.state.plusClass} onClick={(event) => {
+                this.props.addOne(event, this.state.quantity, this.props.product.id);
+                const quantity = this.state.quantity + 1;
+                const plusClass = quantity + 1 >= this.props.product.stock ? 'ui disabled button' : 'ui button';
+                this.setState({ quantity, plusClass });
+              }} >
               <i className="plus icon" />
             </button>
-            <button className="ui button">
+            <button
+              className={this.state.minusClass} onClick={(event) => {
+                this.props.removeOne(event, this.state.quantity, this.props.product.id);
+                const quantity = this.state.quantity - 1;
+                const minusClass = quantity === 1 ? 'ui disabled button' : 'ui button';
+                this.setState({ quantity, minusClass });
+              }} >
               <i className="minus icon" />
             </button>
             <button className="ui button">
