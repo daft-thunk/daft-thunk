@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 // import { addOrder } from '../store';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Rating } from 'semantic-ui-react';
 
 /**
  * COMPONENT
@@ -10,35 +10,46 @@ import { Button, Form } from 'semantic-ui-react';
 class Review extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      rating: 3
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    console.log(this.state)
-    this.setState({[e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  render() {
+  handleRate = (e, { rating, maxRating }) =>
+    this.setState({ rating, maxRating });
 
+  render() {
+    const { rating } = this.state;
     const { handleSubmit } = this.props;
 
     return (
       <div>
         <Form onSubmit={() => handleSubmit(event, this.state)}>
-          <Form.Field>
-            <label>title</label>
-            <input placeholder="title" name="title" onChange={this.handleChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>review</label>
-            <input placeholder="review" name="review" onChange={this.handleChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>rating</label>
-            <input placeholder="rating" name="rating" onChange={this.handleChange} />
-          </Form.Field>
-          <Button type="submit">Continue</Button>
+          <Form.Group widths="equal">
+            <Form.Field>
+              <label>Rating:</label>
+              <Rating
+                icon="star"
+                defaultRating={3}
+                maxRating={5}
+                onRate={this.handleRate}
+              />
+            </Form.Field>
+          </Form.Group>
+          <Form.TextArea
+            onChange={this.handleChange}
+            label="Review"
+            name="review"
+            placeholder="Tell us your thoughts..."
+            width={10}
+          />
+          <br />
+          <Button type="submit">Submit</Button>
         </Form>
       </div>
     );
@@ -53,17 +64,15 @@ class Review extends Component {
  *   can stay DRY with interfaces that are very similar to each other!
  */
 
-const mapState = (state) => {
-  return {
-
-  };
+const mapState = state => {
+  return {};
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
     handleSubmit(evt, localState) {
       const { title, review, rating } = localState;
-    //  dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
+      //  dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
     }
   };
 };
