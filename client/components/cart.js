@@ -11,7 +11,7 @@ export function Cart(props){
     return acc + price;
   }
 
-  if (props.cart.products !== undefined) console.log(props.cart.products.reduce(reducer));
+  let total = props.cart.products !== undefined ? props.cart.products.reduce(reducer, 0) : 0;
 
   return (
     <div>
@@ -22,7 +22,7 @@ export function Cart(props){
         ) : <h2>Cart is Empty</h2>
       }
       <div className="total">
-        <h3>Total $300</h3>
+        <h3>Total {total.toFixed(2)}</h3>
       </div>
     </div>
   );
