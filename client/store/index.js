@@ -4,7 +4,6 @@ import thunkMiddleware from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import user from './user';
 import products from './products';
-
 import cart from './cart';
 import activeProduct from './activeProduct';
 import orders from './orders';
