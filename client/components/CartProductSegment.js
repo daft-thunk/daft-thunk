@@ -46,7 +46,8 @@ class CartProductSegment extends Component {
                 this.props.addOne(event, this.state.quantity, this.props.product.id);
                 const quantity = this.state.quantity + 1;
                 const plusClass = quantity + 1 >= this.props.product.stock ? 'ui disabled button' : 'ui button';
-                this.setState({ quantity, plusClass });
+                const minusClass = quantity === 1 ? 'ui disabled button' : 'ui button';
+                this.setState({ quantity, plusClass, minusClass });
               }} >
               <i className="plus icon" />
             </button>
@@ -55,11 +56,16 @@ class CartProductSegment extends Component {
                 this.props.removeOne(event, this.state.quantity, this.props.product.id);
                 const quantity = this.state.quantity - 1;
                 const minusClass = quantity === 1 ? 'ui disabled button' : 'ui button';
-                this.setState({ quantity, minusClass });
+                const plusClass = quantity + 1 >= this.props.product.stock ? 'ui disabled button' : 'ui button';
+                this.setState({ quantity, minusClass, plusClass });
               }} >
               <i className="minus icon" />
             </button>
-            <button className="ui button">
+            <button
+              className="ui button" onClick={(event) => {
+                this.props.removeProduct(event, this.props.product.id);
+                console.log('product was removed');
+              }}>
               <i className="trash alternate outline icon" />
             </button>
           </div>

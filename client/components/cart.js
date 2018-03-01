@@ -12,6 +12,7 @@ class Cart extends Component {
 
     this.addOneToQuanity = this.addOneToQuanity.bind(this);
     this.removeOneFromQuanity = this.removeOneFromQuanity.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,16 @@ class Cart extends Component {
     .catch(console.error);
   }
 
+  removeFromCart (event, productId) {
+    event.preventDefault();
+    axios.delete(`/api/cart/${this.props.cart.id}`, {productId: 3})
+    .then((status) => {
+      console.log(status);
+      this.props.fetchCart(this.props.cart.id);
+    })
+    .catch(console.error);
+  }
+
   render() {
     // add up cost for cart
     function reducer(acc, curProduct) {
@@ -49,7 +60,7 @@ class Cart extends Component {
         <h1>Cart</h1>
         {
           this.props.cart.products !== undefined ? (
-            this.props.cart.products.map(product => <CartProductSegment key={product.id} product={product} addOne={this.addOneToQuanity} removeOne={this.removeOneFromQuanity} />)
+            this.props.cart.products.map(product => <CartProductSegment key={product.id} product={product} addOne={this.addOneToQuanity} removeOne={this.removeOneFromQuanity} removeProduct={this.removeFromCart} />)
           ) : <h2>Cart is Empty</h2>
         }
         <div className="total">
