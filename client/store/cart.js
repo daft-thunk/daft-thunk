@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 const SET_CART = 'SET_CART';
-const ADD_ONE_TO_CART = 'ADD_ONE_TO_CART';
 
 const setCart = cart => ({type: SET_CART, cart});
-const addOneProduct = product => ({type: ADD_ONE_TO_CART, product})
 
 export const fetchCart = cartId => dispatch => {
   axios.get(`/api/cart/${cartId}`)
