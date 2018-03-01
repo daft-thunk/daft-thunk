@@ -45,7 +45,7 @@ class OrderForm extends Component {
             <label>ZIP</label>
             <input placeholder="ZIP" name="zip" onChange={this.handleChange} />
           </Form.Field>
-          <Button type="submit">Contiune</Button>
+          <Button type="submit">Continue</Button>
         </Form>
       </div>
     );
