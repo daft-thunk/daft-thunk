@@ -72,6 +72,39 @@ form div {
   align-self: flex-end;
 }
 
+.cart {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart a {
+  font-size: 2em;
+}
+
+.cart img {
+  max-height: 100px;
+  width: auto;
+  margin-left: 15px;
+}
 
 
+.cart-price {
+  font-size: 1.5em;
+}
+
+.cart-quantity {
+  margin-right: 15px;
+  text-align: center;
+  font-size: 1.5em;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.cart-quantity span {
+  font-weight: 700;
+}
+
+.cart-quantity ui {
+  padding-top:10px;
+}
 
