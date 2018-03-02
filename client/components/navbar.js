@@ -50,6 +50,12 @@ class Navbar extends Component {
         }
 
         {this.props.isLoggedIn &&
+          <Menu.Item as={Link} to="/profile" name="profile" active={activeItem === 'profile'} onClick={this.handleItemClick}>
+            Profile
+          </Menu.Item>
+        }
+
+        {this.props.isLoggedIn &&
         <Menu.Item as={Link} to="/login" name="logout" active={activeItem === 'logout'} onClick={this.props.handleClick}>
           Logout
         </Menu.Item>
