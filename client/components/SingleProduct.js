@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { history } from '../history';
-import store, { setProductThunk } from '../store';
+import store, { setProductThunk, addProductToCart } from '../store';
 import { Icon, Button } from 'semantic-ui-react'
 
 class SingleProduct extends Component{
@@ -22,7 +22,7 @@ class SingleProduct extends Component{
           <h3>{this.props.product.description}</h3>
           <h3>Manufacturer: {this.props.product.manufacturer}</h3>
           <Button className="productButton" fluid animated="vertical">
-            <Button.Content hidden>Add to Cart</Button.Content>
+            <Button.Content onClick={() => this.props.handleAddToCart(this.props.cartId, this.props.product.id)} hidden>Add to Cart</Button.Content>
               <Button.Content visible>
               <Icon name="shop" />
             </Button.Content>
@@ -51,10 +51,18 @@ class SingleProduct extends Component{
 }
 
 const mapProps = state => ({
-  product: state.activeProduct
+  product: state.activeProduct,
+  cartId: state.cart.id
 });
 
-const Container = connect(mapProps)(SingleProduct);
+const mapDispatch = (dispatch, ownProps) => ({
+  handleAddToCart(cartId, productId) {
+    console.log(cartId)
+    dispatch(addProductToCart(cartId, { productId } ));
+  }
+});
+
+const Container = connect(mapProps, mapDispatch)(SingleProduct);
 
 export default Container;
 
