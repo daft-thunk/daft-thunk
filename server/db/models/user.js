@@ -32,7 +32,10 @@ const User = db.define('user', {
   },
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-
+  role: {
+    type: Sequelize.ENUM(['admin', 'user']),
+    defaultValue: 'user'
+  },
   passwordUpdateDate: {
     type: Sequelize.DATE,
     defaultValue: Date.now()
@@ -40,7 +43,7 @@ const User = db.define('user', {
 }, {
   getterMethods: {
     fullName() {
-      return this.firstName + ' ' + this.lastName
+      return this.firstName + ' ' + this.lastName;
     }
   }
 });
