@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CartProductSegment from './CartProductSegment';
 import { fetchCart } from '../store/cart';
 import axios from 'axios';
+import { Button } from 'semantic-ui-react';
 
 class Cart extends Component {
   constructor() {
@@ -75,6 +76,7 @@ class Cart extends Component {
         <div className="total">
           <h3>Total <span id="total-value">{total.toFixed(2)}</span></h3>
         </div>
+        <Button as={Link} to="/checkout" >Checkout</Button>
       </div>
     );
   }
