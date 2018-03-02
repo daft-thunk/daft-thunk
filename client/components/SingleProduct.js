@@ -33,10 +33,12 @@ class SingleProduct extends Component {
         </div>
         <hr width="75%" />
         <h1>Reviews</h1>
+        {/* check if user has ordered product. */}
+          {/* send userId to <Review> */}
         {
-          // check if user has ordered product
+          this.props.product.id &&
+          <Review productId={this.props.product.id} userId={1} />
         }
-        <Review />
         {this.props.product.reviews &&
           this.props.product.reviews.map(review => {
             let stars = String.fromCharCode(9733).repeat(review.rating);
