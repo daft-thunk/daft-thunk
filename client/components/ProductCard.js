@@ -38,7 +38,6 @@ const mapDispatch = (dispatch, ownProps) => ({
     dispatch(setProduct(ownProps.product));
   },
   handleAddToCart(cartId, productId) {
-    console.log(cartId)
     dispatch(addProductToCart(cartId, { productId } ));
   }
 });
