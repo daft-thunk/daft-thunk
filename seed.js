@@ -191,6 +191,8 @@ async function seed() {
   await cart1.addProduct(guitar1.id);
   await cart2.addProduct(drum1.id);
   // console.log(cart1);
+
+  await user1.setCart(cart1);
 }
 
 seed()

@@ -27,6 +27,8 @@ Product.belongsToMany(Cart, {through: Cart_To_Product});
 Order.belongsTo(Cart);
 Order.belongsTo(User);
 
+User.hasOne(Cart);
+
 
 /**
  * Model exports below.

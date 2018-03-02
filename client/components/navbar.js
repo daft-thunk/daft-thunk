@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import { Menu, Icon } from 'semantic-ui-react';
 import { getProductsThunk } from '../store/products';
-import { fetchCart } from '../store/cart';
 
 class Navbar extends Component {
   constructor(props){
@@ -16,8 +15,8 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.props.fetchAllProducts();
-    let cartId = 1;
-    this.props.fetchCart(cartId);
+    // let cartId = 1;
+    // this.props.fetchCart(cartId);
   }
 
   render() {
@@ -101,9 +100,6 @@ const mapDispatch = dispatch => {
     },
     fetchAllProducts() {
       dispatch(getProductsThunk());
-    },
-    fetchCart(cartId) {
-      dispatch(fetchCart(cartId));
     }
   };
 };
