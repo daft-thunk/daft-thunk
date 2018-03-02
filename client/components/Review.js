@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
-// import { addOrder } from '../store';
-import { Button, Form, Rating } from 'semantic-ui-react';
+import { submitReviewThunk } from '../store';
+import { Button, Form, Rating, Message } from 'semantic-ui-react';
 
 /**
  * COMPONENT
@@ -11,25 +11,48 @@ class Review extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rating: 3
+      rating: 3,
+      productId: this.props.productId,
+      userId: this.props.userId,
+      error: false,
+      success: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleRate = this.handleRate.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      if (this.state.review) {
+        this.setState({ error: false });
+        this.setState({ success: false });
+      }
+    });
   }
 
-  handleRate = (e, { rating, maxRating }) =>
+  handleRate(e, { rating, maxRating }) {
     this.setState({ rating, maxRating });
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+    if (!this.state.review) {
+      this.setState({ error: true });
+    } else {
+      const { userId, productId, review, rating } = this.state;
+      console.log('state:', userId, productId, review, rating);
+      this.props.submitReview({ userId, productId, review, rating });
+      this.setState({ success: true });
+    }
+  }
 
   render() {
     const { rating } = this.state;
-    const { handleSubmit } = this.props;
 
     return (
       <div>
-        <Form onSubmit={() => handleSubmit(event, this.state)}>
+        <Form onSubmit={() => this.handleSubmit(event)}>
           <Form.Group widths="equal">
             <Form.Field>
               <label>Rating:</label>
@@ -42,14 +65,29 @@ class Review extends Component {
             </Form.Field>
           </Form.Group>
           <Form.TextArea
+            error={this.state.error}
             onChange={this.handleChange}
             label="Review"
             name="review"
             placeholder="Tell us your thoughts..."
             width={10}
           />
+          {this.state.error && (
+            <Message
+              error
+              header="This field is required."
+              style={{ display: 'block', maxWidth: 220 }}
+            />
+          )}
+          {this.state.success && (
+            <Message
+              success
+              header="Your review was submitted."
+              style={{ display: 'block', maxWidth: 270 }}
+            />
+          )}
           <br />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={this.state.success}>Submit</Button>
         </Form>
       </div>
     );
@@ -70,9 +108,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt, localState) {
-      const { title, review, rating } = localState;
-      //  dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}` }));
+    submitReview(review) {
+      dispatch(submitReviewThunk(review));
     }
   };
 };
