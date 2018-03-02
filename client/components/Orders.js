@@ -14,10 +14,10 @@ class Orders extends Component {
   }
 
   render() {
-    let userOrders = this.props.orders || [];
+    // let userOrders = this.props.orders || [];
     // console.log('userOrders and props:', this.props);
     if (this.props.userId) {
-      // console.log('this.props.userId', this.props.userId);
+      console.log('this.props.userId', this.props.userId);
       // NOT a secure way to filter...
       // const userId = this.props.userId;
       // userOrders = userOrders.filter(order => {
@@ -25,7 +25,7 @@ class Orders extends Component {
       // });
     }
     let allOrders = this.props.orders;
-    allOrders = allOrders.length ? allOrders : []
+    // allOrders = allOrders.length ? allOrders : []
     console.log('all orders:', allOrders, this.props);
     return (
       <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Orders from './Orders';
+import UserOrders from './UserOrders';
 
 /**
  * COMPONENT
@@ -13,9 +13,7 @@ export const UserHome = (props) => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <h3>Your user id: {props.userId}</h3>
-      <h3>Your orders:</h3>
-      <Orders userId={props.userId} />
+      <UserOrders userId={props.userId} />
     </div>
   );
 };
