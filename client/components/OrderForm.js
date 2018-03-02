@@ -71,9 +71,9 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt, localState, cart) {
-      console.log(cart)
       const { email, address, city, state, zip } = localState;
-      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: cart }));
+      console.log(cart.userId)
+      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: cart, userId: cart.userId }));
     }
   };
 };
@@ -89,3 +89,4 @@ export default connect(mapState, mapDispatch)(OrderForm);
 //   state: PropTypes.string.isRequired,
 //   zip: PropTypes.string.isRequired
 // };
+
