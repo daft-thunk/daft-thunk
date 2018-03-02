@@ -129,3 +129,12 @@ form div {
   height: 60%;
   align-self: center;
 }
+
+.form-field {
+  width: 51vw
+}
+
+.form-button {
+  display: block;
+  position: relative;
+}

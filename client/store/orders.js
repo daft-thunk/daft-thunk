@@ -21,6 +21,13 @@ export const getOrdersThunk = () => dispatch => {
     .catch(err => console.error(`Fetching orders unsuccessful`, err));
 };
 
+export const getUserOrders = userId => dispatch => {
+  return axios.get(`/api/orders/by/${userId}`)
+    .then(res => res.data)
+    .then(orders => dispatch(initOrders(orders)))
+    .catch(console.error);
+}
+
 export const addOrder = (order) => dispatch => {
   axios
     .post('api/orders', order)
