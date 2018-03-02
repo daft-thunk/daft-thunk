@@ -19,14 +19,17 @@ import './socket';
 // }
 
 ///set up cookie logic
-// if (!document.cookie) {
-//   axios.post('/api/cart')
-//   .then(res => res.data)
-//   .then(cart => {
-//     document.cookie = cart.id
-//     store.dispatch(fetchCart(cart.id))
-//   })
-//}
+if (!document.cookie) {
+  axios.post('/api/cart')
+  .then(res => res.data)
+  .then(cart => {
+    document.cookie = cart.id;
+    store.dispatch(fetchCart(cart.id));
+  });
+}
+else {
+  store.dispatch(fetchCart(document.cookie));
+}
 
 ReactDOM.render(
   <Provider store={store}>
