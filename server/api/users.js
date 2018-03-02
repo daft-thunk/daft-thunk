@@ -17,7 +17,6 @@ router.get('/:id/cart', (req, res, next) => {
   User.findById(req.params.id)
     .then(user => user.getCart({include: [Product]}))
     .then(cart => {
-      console.log(cart);
       res.json(cart);
     })
     .catch(next)
@@ -29,3 +28,4 @@ router.put('/:id/cart', (req, res, next) => {
     .then(() => res.sendStatus(201))
     .catch(next);
 })
+

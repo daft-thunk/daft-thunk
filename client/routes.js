@@ -2,8 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
+import {Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review} from './components';
+import { me, setUserCart } from './store';
+=======
 import { Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review, Checkout, Confirmation } from './components';
 import {me} from './store';
+>>>>>>> master
 
 /**
  * COMPONENT
@@ -54,7 +59,11 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+<<<<<<< HEAD
+    user: state.user
+=======
     isAdmin: state.user.role === 'admin'
+>>>>>>> master
   };
 };
 
