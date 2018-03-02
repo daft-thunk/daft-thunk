@@ -32,14 +32,14 @@ class Orders extends Component {
         <h1>all the orders - admin view</h1>
         <div className="flex">
           {allOrders.map(order => {
-            console.log(order)
+            // object?
+            console.log(order.purchasedCart);
             return (
               <ul key={order.id}>
                 <li>User Id: {order.userId}</li>
                 <li>User Email: {order.email}</li>
                 <li>Status: {order.status}</li>
                 <li>Cart Id:{order.cartId}</li>
-                <li>Cart Data:{order.purchasedCart}</li>
                 <li>Date Ordered: {order.dateOrdered}</li>
                 <li>Date Shipped: {order.dateShipped}</li>
                 <li>Date Arrived: {order.dateArrived}</li>
