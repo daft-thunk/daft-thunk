@@ -1,4 +1,5 @@
 import axios from 'axios';
+import  history  from '../history';
 /**
  * ACTION TYPES
  */
@@ -25,16 +26,17 @@ export const addOrder = (order) => dispatch => {
   axios
     .post('api/orders', order)
     .then(res => dispatch(placeOrder(res.data)))
+    .then(history.push('/confirmation'))
     .catch(err => console.error(`Creating order: ${order} unsuccessful`, err));
 };
 
 /**
  * REDUCER
  */
-export default function(state = {}, action) {
+export default function(state = [], action) {
   switch (action.type) {
     case PLACE_ORDER:
-      return action.order;
+      return [action.order];// to check: orders.length === 1
     case INIT_ORDERS:
       return action.orders;
     default:

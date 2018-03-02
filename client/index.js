@@ -16,8 +16,19 @@ import './socket';
 ///if not a new user, set the cart in store to either the users cookie or the logged in users cart///
 axios.get('/sessionCart')
   .then(res => res.data)
+<<<<<<< HEAD
     .then(cartId => store.dispatch(fetchCart(cartId)))
   .catch(console.error);
+=======
+  .then(cart => {
+    document.cookie = cart.id;
+    store.dispatch(fetchCart(4));
+  });
+}
+else {
+  store.dispatch(fetchCart(4));
+}
+>>>>>>> master
 
 ReactDOM.render(
   <Provider store={store}>

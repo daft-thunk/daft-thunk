@@ -114,3 +114,12 @@ form div {
 .total {
   margin: 10px;
 }
+
+.form-field {
+  width: 51vw
+}
+
+.form-button {
+  display: block;
+  position: relative;
+}
