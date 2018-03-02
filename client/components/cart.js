@@ -8,7 +8,6 @@ import axios from 'axios';
 class Cart extends Component {
   constructor() {
     super();
-    this.state = {};
 
     this.addOneToQuanity = this.addOneToQuanity.bind(this);
     this.removeOneFromQuanity = this.removeOneFromQuanity.bind(this);
@@ -23,16 +22,24 @@ class Cart extends Component {
   addOneToQuanity (event, quantity, productId) {
     event.preventDefault();
     quantity++;
-    axios.put(`/api/cart/${this.props.cart.id}`, {productId, quantity})
-    .then(console.log)
+    const cartId = this.props.cart.id;
+    axios.put(`/api/cart/${cartId}`, {productId, quantity})
+    .then((status) => {
+      console.log(status);
+      this.props.fetchCart(cartId);
+    })
     .catch(console.error);
   }
 
   removeOneFromQuanity (event, quantity, productId) {
     event.preventDefault();
     quantity--;
-    axios.put(`/api/cart/${this.props.cart.id}`, {productId, quantity})
-    .then(console.log)
+    const cartId = this.props.cart.id;
+    axios.put(`/api/cart/${cartId}`, {productId, quantity})
+    .then((status) => {
+      console.log(status);
+      this.props.fetchCart(cartId);
+    })
     .catch(console.error);
   }
 
@@ -66,7 +73,7 @@ class Cart extends Component {
           ) : <h2>Cart is Empty</h2>
         }
         <div className="total">
-          <h3>Total {total.toFixed(2)}</h3>
+          <h3>Total <span id="total-value">{total.toFixed(2)}</span></h3>
         </div>
       </div>
     );
