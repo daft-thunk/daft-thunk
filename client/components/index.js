@@ -17,4 +17,5 @@ export {default as ProductCard} from './ProductCard';
 export {default as AltCarousel} from './AltCarousel';
 export {default as Orders} from './Orders';
 export {default as Review} from './Review';
+export {default as Checkout} from './Checkout';
 // export { Cart } from './Cart'

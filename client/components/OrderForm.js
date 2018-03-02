@@ -15,7 +15,7 @@ class OrderForm extends Component {
   }
 
   handleChange(e) {
-    this.setState({[e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -25,27 +25,29 @@ class OrderForm extends Component {
     return (
       <div>
         <Form onSubmit={() => handleSubmit(event, this.state, this.props.cart)}>
-          <Form.Field>
+          <Form.Field className="form-field">
             <label>email</label>
             <input placeholder="email" name="email" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field>
+          <Form.Field className="form-field">
             <label>Address</label>
             <input placeholder="Address" name="address" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field>
+          <Form.Field className="form-field">
             <label>City</label>
             <input placeholder="City" name="city" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field>
+          <Form.Field className="form-field">
             <label>State</label>
             <input placeholder="State" name="state" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field>
+          <Form.Field className="form-field">
             <label>ZIP</label>
             <input placeholder="ZIP" name="zip" onChange={this.handleChange} />
           </Form.Field>
-          <Button type="submit">Continue</Button>
+          <div className="form-button">
+            <Button color="green" type="submit">Place Order</Button>
+          </div>
         </Form>
       </div>
     );
@@ -62,15 +64,16 @@ class OrderForm extends Component {
 
 const mapState = (state) => {
   return {
-      cart: state.cart
+    cart: state.cart
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt, localState, cart) {
+      console.log(cart)
       const { email, address, city, state, zip } = localState;
-     dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedcart: cart }));
+      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: cart }));
     }
   };
 };
