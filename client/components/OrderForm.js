@@ -24,7 +24,7 @@ class OrderForm extends Component {
 
     return (
       <div>
-        <Form onSubmit={() => handleSubmit(event, this.state, this.props.cart)}>
+        <Form onSubmit={() => handleSubmit(event, this.state, this.props.cart, this.props.user)}>
           <Form.Field className="form-field">
             <label>email</label>
             <input placeholder="email" name="email" onChange={this.handleChange} />
@@ -64,16 +64,17 @@ class OrderForm extends Component {
 
 const mapState = (state) => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(evt, localState, cart) {
+    handleSubmit(evt, localState, cart, user) {
       const { email, address, city, state, zip } = localState;
-      console.log(cart.userId)
-      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: cart, userId: cart.userId }));
+      console.log(user.id)
+      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: cart, userId: user.id, cartId: cart.id }));
     }
   };
 };
