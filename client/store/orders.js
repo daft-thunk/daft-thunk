@@ -1,4 +1,5 @@
 import axios from 'axios';
+import  history  from '../history';
 /**
  * ACTION TYPES
  */
@@ -32,6 +33,7 @@ export const addOrder = (order) => dispatch => {
   axios
     .post('api/orders', order)
     .then(res => dispatch(placeOrder(res.data)))
+    .then(history.push('/confirmation'))
     .catch(err => console.error(`Creating order: ${order} unsuccessful`, err));
 };
 

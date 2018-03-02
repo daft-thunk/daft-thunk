@@ -15,8 +15,6 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.props.fetchAllProducts();
-    // let cartId = 1;
-    // this.props.fetchCart(cartId);
   }
 
   render() {
