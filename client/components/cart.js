@@ -38,7 +38,9 @@ class Cart extends Component {
 
   removeFromCart (event, productId) {
     event.preventDefault();
-    axios.delete(`/api/cart/${this.props.cart.id}`, {productId: 3})
+    axios.delete(`/api/cart/${this.props.cart.id}`, {
+      data: { productId }
+    })
     .then((status) => {
       console.log(status);
       this.props.fetchCart(this.props.cart.id);
