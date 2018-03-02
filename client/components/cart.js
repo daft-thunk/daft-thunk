@@ -14,25 +14,9 @@ class Cart extends Component {
     this.removeFromCart = this.removeFromCart.bind(this);
   }
 
-<<<<<<< HEAD
-  if (props.cart.products){
-    (props.cart.products.reduce(reducer));
-  }
-
-  return (
-    <div>
-      <h1>Cart</h1>
-      {
-        props.cart.products !== undefined ? (
-          props.cart.products.map(product => <CartProductSegment key={product.id} product={product} />)
-        ) : <h2>Cart is Empty</h2>
-      }
-      <div className="total">
-        <h3>Total $300</h3>
-=======
   componentDidMount() {
-    const cartId = 1; // TESTING PURPOSES ONLY
-    this.props.fetchCart(cartId);
+    // const cartId = 1; // TESTING PURPOSES ONLY
+    // this.props.fetchCart(cartId);
   }
 
   addOneToQuanity (event, quantity, productId) {
@@ -91,7 +75,6 @@ class Cart extends Component {
         <div className="total">
           <h3>Total <span id="total-value">{total.toFixed(2)}</span></h3>
         </div>
->>>>>>> 3f711a017fef7e5c2a733f3642d891509c4eedf2
       </div>
     );
   }
