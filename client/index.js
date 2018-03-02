@@ -19,11 +19,11 @@ if (!document.cookie) {
   .then(res => res.data)
   .then(cart => {
     document.cookie = cart.id;
-    store.dispatch(fetchCart(cart.id));
+    store.dispatch(fetchCart(4));
   });
 }
 else {
-  store.dispatch(fetchCart(document.cookie));
+  store.dispatch(fetchCart(4));
 }
 
 ReactDOM.render(
