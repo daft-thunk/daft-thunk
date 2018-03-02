@@ -15,8 +15,6 @@ class Navbar extends Component {
 
   componentDidMount() {
     this.props.fetchAllProducts();
-    // let cartId = 1;
-    // this.props.fetchCart(cartId);
   }
 
   render() {
@@ -46,6 +44,12 @@ class Navbar extends Component {
         {!this.props.isLoggedIn &&
           <Menu.Item as={Link} to="/login" name="login" active={activeItem === 'login'} onClick={this.handleItemClick}>
             Login
+          </Menu.Item>
+        }
+
+        {this.props.isLoggedIn &&
+          <Menu.Item as={Link} to="/profile" name="profile" active={activeItem === 'profile'} onClick={this.handleItemClick}>
+            Profile
           </Menu.Item>
         }
 

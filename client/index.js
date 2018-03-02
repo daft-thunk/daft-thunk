@@ -14,17 +14,10 @@ import './socket';
 
 ///If no cookie, make a new cart and set cookie to the id of that cart.
 ///if not a new user, set the cart in store to either the users cookie or the logged in users cart///
-if (!document.cookie) {
-  axios.post('/api/cart')
+axios.get('/sessionCart')
   .then(res => res.data)
-  .then(cart => {
-    document.cookie = cart.id;
-    store.dispatch(fetchCart(4));
-  });
-}
-else {
-  store.dispatch(fetchCart(4));
-}
+    .then(cartId => store.dispatch(fetchCart(cartId)))
+  .catch(console.error);
 
 ReactDOM.render(
   <Provider store={store}>
