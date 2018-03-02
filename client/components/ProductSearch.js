@@ -67,7 +67,7 @@ class ProductSearch extends Component {
 }
 
 const mapProps = state => ({
-  products: state.products
+  products: state.products.allProducts
 });
 
 const mapDispatch = null;
