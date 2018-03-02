@@ -11,7 +11,9 @@ export function Cart(props){
     return acc + price;
   }
 
-  if (props.cart.products !== undefined) console.log(props.cart.products.reduce(reducer));
+  if (props.cart.products){
+    (props.cart.products.reduce(reducer));
+  }
 
   return (
     <div>
