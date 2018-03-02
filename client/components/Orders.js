@@ -4,36 +4,32 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { getOrdersThunk } from '../store/orders';
 import store from '../store';
+import { Button, Form } from 'semantic-ui-react';
 // import { ProductSearch, ProductSelector, ProductCard } from './index';
 
 class Orders extends Component {
   componentDidMount() {
-    // console.log(this.props);
     this.props.fetchOrders();
-    // store.dispatch(getOrdersThunk());
   }
 
   render() {
-    // let userOrders = this.props.orders || [];
-    // console.log('userOrders and props:', this.props);
-    if (this.props.userId) {
-      console.log('this.props.userId', this.props.userId);
-      // NOT a secure way to filter...
-      // const userId = this.props.userId;
-      // userOrders = userOrders.filter(order => {
-      //   return order.userId === userId;
-      // });
-    }
     let allOrders = this.props.orders;
-    // allOrders = allOrders.length ? allOrders : []
     console.log('all orders:', allOrders, this.props);
+
     return (
       <div>
         <h1>all the orders - admin view</h1>
+        <Form.Field label="Filter orders by category:" control="select">
+          <option value="Created">Created</option>
+          <option value="Processing">Processing</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </Form.Field>
         <div className="flex">
           {allOrders.map(order => {
-            // object?
-            console.log(order.purchasedCart);
+            if (order.purchasedCart) {
+              console.log('cart', order.purchasedCart);
+            }
             return (
               <ul key={order.id}>
                 <li>User Id: {order.userId}</li>
