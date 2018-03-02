@@ -15,8 +15,8 @@ class Cart extends Component {
   }
 
   componentDidMount() {
-    const cartId = 1; // TESTING PURPOSES ONLY
-    this.props.fetchCart(cartId);
+    // const cartId = 1; // TESTING PURPOSES ONLY
+    // this.props.fetchCart(cartId);
   }
 
   addOneToQuanity (event, quantity, productId) {
