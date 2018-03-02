@@ -11,6 +11,7 @@ const sessionStore = new SequelizeStore({db});
 const PORT = process.env.PORT || 8080;
 const app = express();
 const socketio = require('socket.io');
+const cookieParser = require('cookie-parser')
 module.exports = app;
 
 /**
@@ -55,8 +56,6 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth'));
   app.use('/api', require('./api'));
-
-//  sessionStore.set('stuff', {cartId: 5});
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')));
