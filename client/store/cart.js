@@ -13,6 +13,7 @@ export const fetchCart = cartId => dispatch => {
     .catch(console.error);
 };
 
+
 export const addProductToCart = (cartId, productId) => dispatch => {
   axios.post(`/api/cart/${cartId}`, productId)
     .then(() => dispatch(fetchCart(cartId)))

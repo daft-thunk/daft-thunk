@@ -18,7 +18,12 @@ import './socket';
 //   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 // }
 
+<<<<<<< HEAD
 ///set up cookie logic
+=======
+///If no cookie, make a new cart and set cookie to the id of that cart.
+///if not a new user, set the cart in store to either the users cookie or the logged in users cart///
+>>>>>>> master
 if (!document.cookie) {
   axios.post('/api/cart')
   .then(res => res.data)
@@ -28,6 +33,10 @@ if (!document.cookie) {
   });
 }
 else {
+<<<<<<< HEAD
+=======
+  // const cartId = store.user.id ? store.user.cart.id : document.cookie;
+>>>>>>> master
   store.dispatch(fetchCart(document.cookie));
 }
 
