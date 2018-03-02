@@ -31,10 +31,10 @@ export const addOrder = (order) => dispatch => {
 /**
  * REDUCER
  */
-export default function(state = {}, action) {
+export default function(state = [], action) {
   switch (action.type) {
     case PLACE_ORDER:
-      return action.order;
+      return [action.order];// to check: orders.length === 1
     case INIT_ORDERS:
       return action.orders;
     default:
