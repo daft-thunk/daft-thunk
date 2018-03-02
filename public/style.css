@@ -91,7 +91,6 @@ form div {
   margin-left: 15px;
 }
 
-
 .cart-price {
   font-size: 1.5em;
 }
@@ -112,3 +111,6 @@ form div {
   padding-top:10px;
 }
 
+.total {
+  margin: 10px;
+}

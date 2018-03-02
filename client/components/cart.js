@@ -1,16 +1,20 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import CartProductSegment from './CartProductSegment';
+import { fetchCart } from '../store/cart';
+import axios from 'axios';
 
-export function Cart(props){
+class Cart extends Component {
+  constructor() {
+    super();
 
-  // add up cost for cart
-  function reducer (acc, curProduct) {
-    let price = curProduct.price * curProduct.cart_to_product.quantity;
-    return acc + price;
+    this.addOneToQuanity = this.addOneToQuanity.bind(this);
+    this.removeOneFromQuanity = this.removeOneFromQuanity.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
+<<<<<<< HEAD
   if (props.cart.products){
     (props.cart.products.reduce(reducer));
   }
@@ -25,9 +29,72 @@ export function Cart(props){
       }
       <div className="total">
         <h3>Total $300</h3>
+=======
+  componentDidMount() {
+    const cartId = 1; // TESTING PURPOSES ONLY
+    this.props.fetchCart(cartId);
+  }
+
+  addOneToQuanity (event, quantity, productId) {
+    event.preventDefault();
+    quantity++;
+    const cartId = this.props.cart.id;
+    axios.put(`/api/cart/${cartId}`, {productId, quantity})
+    .then((status) => {
+      console.log(status);
+      this.props.fetchCart(cartId);
+    })
+    .catch(console.error);
+  }
+
+  removeOneFromQuanity (event, quantity, productId) {
+    event.preventDefault();
+    quantity--;
+    const cartId = this.props.cart.id;
+    axios.put(`/api/cart/${cartId}`, {productId, quantity})
+    .then((status) => {
+      console.log(status);
+      this.props.fetchCart(cartId);
+    })
+    .catch(console.error);
+  }
+
+  removeFromCart (event, productId) {
+    event.preventDefault();
+    axios.delete(`/api/cart/${this.props.cart.id}`, {
+      data: { productId }
+    })
+    .then((status) => {
+      console.log(status);
+      this.props.fetchCart(this.props.cart.id);
+    })
+    .catch(console.error);
+  }
+
+  render() {
+    // add up cost for cart
+    function reducer(acc, curProduct) {
+      let price = curProduct.price * curProduct.cart_to_product.quantity;
+      return acc + price;
+    }
+
+    let total = this.props.cart.products !== undefined ? this.props.cart.products.reduce(reducer, 0) : 0;
+
+    return (
+      <div>
+        <h1>Cart</h1>
+        {
+          this.props.cart.products !== undefined ? (
+            this.props.cart.products.map(product => <CartProductSegment key={product.id} product={product} addOne={this.addOneToQuanity} removeOne={this.removeOneFromQuanity} removeProduct={this.removeFromCart} />)
+          ) : <h2>Cart is Empty</h2>
+        }
+        <div className="total">
+          <h3>Total <span id="total-value">{total.toFixed(2)}</span></h3>
+        </div>
+>>>>>>> 3f711a017fef7e5c2a733f3642d891509c4eedf2
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 const mapProps = state => {
@@ -36,6 +103,14 @@ const mapProps = state => {
   };
 };
 
-const Container = connect(mapProps)(Cart);
+const mapDispatch = dispatch => {
+  return {
+    fetchCart(cartId) {
+      dispatch(fetchCart(cartId));
+    }
+  };
+};
+
+const Container = connect(mapProps, mapDispatch)(Cart);
 
 export default Container;
