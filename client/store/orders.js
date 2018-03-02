@@ -18,7 +18,7 @@ export const getOrdersThunk = () => dispatch => {
   return axios
     .get('/api/orders')
     .then(res => dispatch(initOrders(res.data)))
-    .catch(err => console.log(err));
+    .catch(err => console.error(`Fetching orders unsuccessful`, err));
 };
 
 export const addOrder = (order) => dispatch => {

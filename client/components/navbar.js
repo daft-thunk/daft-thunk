@@ -19,7 +19,6 @@ class Navbar extends Component {
 
   render() {
     const { activeItem } = this.state;
-
     return (
       <Menu inverted={true}>
       <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick}>
