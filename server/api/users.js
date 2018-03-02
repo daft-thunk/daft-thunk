@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -11,4 +11,21 @@ router.get('/', (req, res, next) => {
   })
     .then(users => res.json(users))
     .catch(next)
+})
+
+router.get('/:id/cart', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => user.getCart({include: [Product]}))
+    .then(cart => {
+      console.log(cart);
+      res.json(cart);
+    })
+    .catch(next)
+})
+
+router.put('/:id/cart', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => user.setCart(req.body.cartId))
+    .then(() => res.sendStatus(201))
+    .catch(next);
 })
