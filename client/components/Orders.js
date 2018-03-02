@@ -9,32 +9,37 @@ import store from '../store';
 class Orders extends Component {
   componentDidMount() {
     // console.log(this.props);
-    // this.props.fetchOrders();
-    store.dispatch(getOrdersThunk());
+    this.props.fetchOrders();
+    // store.dispatch(getOrdersThunk());
   }
 
   render() {
     let userOrders = this.props.orders || [];
-    console.log('userOrders and props:', this.props);
+    // console.log('userOrders and props:', this.props);
     if (this.props.userId) {
+      // console.log('this.props.userId', this.props.userId);
       // NOT a secure way to filter...
-      const userId = this.props.userId;
-      userOrders = userOrders.filter(order => {
-        return order.userId === userId;
-      });
+      // const userId = this.props.userId;
+      // userOrders = userOrders.filter(order => {
+      //   return order.userId === userId;
+      // });
     }
-
+    let allOrders = this.props.orders;
+    allOrders = allOrders.length ? allOrders : []
+    console.log('all orders:', allOrders, this.props);
     return (
       <div>
         <h1>all the orders - admin view</h1>
         <div className="flex">
-          {userOrders.map(order => {
+          {allOrders.map(order => {
+            console.log(order)
             return (
               <ul key={order.id}>
                 <li>User Id: {order.userId}</li>
                 <li>User Email: {order.email}</li>
                 <li>Status: {order.status}</li>
                 <li>Cart Id:{order.cartId}</li>
+                <li>Cart Data:{order.purchasedCart}</li>
                 <li>Date Ordered: {order.dateOrdered}</li>
                 <li>Date Shipped: {order.dateShipped}</li>
                 <li>Date Arrived: {order.dateArrived}</li>
