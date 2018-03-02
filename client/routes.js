@@ -25,8 +25,8 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={SingleProduct} />
-        {/*This will need to be validated somehow...*/}
-        <Route path="/orders/" component={Orders} />
+        {/*Admin only - will need to be validated somehow...*/}
+        <Route path="/admin/orders/" component={Orders} />
         {
           isLoggedIn &&
             <Switch>
