@@ -16,6 +16,13 @@ router.get('/:orderId', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/by/:userId', (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => user.getOrders())
+    .then(orders => res.json(orders))
+    .catch(next);
+})
+
 router.post('/', (req, res, next) => {
   Order.create(req.body)
     .then(order => res.status(201).json(order))
