@@ -64,19 +64,22 @@ class Cart extends Component {
     }
 
     let total = this.props.cart.products !== undefined ? this.props.cart.products.reduce(reducer, 0) : 0;
-
+    console.log(this.props.cart)
     return (
       <div>
         <h1>Cart</h1>
         {
-          this.props.cart.products !== undefined ? (
+          (this.props.cart.products && this.props.cart.products.length) ? (
             this.props.cart.products.map(product => <CartProductSegment key={product.id} product={product} addOne={this.addOneToQuanity} removeOne={this.removeOneFromQuanity} removeProduct={this.removeFromCart} />)
           ) : <h2>Cart is Empty</h2>
         }
         <div className="total">
           <h3>Total <span id="total-value">{total.toFixed(2)}</span></h3>
         </div>
-        <Button as={Link} to="/checkout" >Checkout</Button>
+        {
+          (this.props.cart.products && this.props.cart.products.length)
+          ? <Button as={Link} to="/checkout" >Checkout</Button>
+          : <Button as={Link} to="/checkout" disabled>Checkout</Button>}
       </div>
     );
   }

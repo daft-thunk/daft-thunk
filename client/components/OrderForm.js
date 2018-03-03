@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addOrder } from '../store';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Message, Dropdown } from 'semantic-ui-react';
 
 /**
  * COMPONENT
@@ -10,7 +10,13 @@ import { Button, Form } from 'semantic-ui-react';
 class OrderForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      emailError: false,
+      addressError: false,
+      cityError: false,
+      stateError: false,
+      zipError: false
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -18,33 +24,86 @@ class OrderForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const { email, address, city, state, zip } = this.state;
+    if (!email || email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+      this.setState({ emailError: true });
+    } if (!address || address.length < 3) {
+      this.setState({ addressError: true });
+    } if (!city || city.length < 1) {
+      this.setState({ cityError: true });
+    } if (!state || state.length < 2) {
+      this.setState({ stateError: true });
+    } if (!zip || zip.length < 5) {
+      this.setState({ zipError: true });
+    } else {
+      this.props.submitOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: this.props.cart, userId: this.props.user.id, cartId: this.props.cart.id });
+    }
+  }
+
   render() {
 
-    const { handleSubmit } = this.props;
+    const { emailError, addressError, cityError, stateError, zipError } = this.state;
 
     return (
       <div>
-        <Form onSubmit={() => handleSubmit(event, this.state, this.props.cart, this.props.user)}>
-          <Form.Field className="form-field">
+        <Form onSubmit={() => this.handleSubmit(event)}>
+          <Form.Field className="form-field" error={emailError}>
             <label>email</label>
             <input placeholder="email" name="email" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field className="form-field">
+          {emailError && (
+            <Message
+              error
+              header="Please enter valid email."
+              style={{ display: 'block', maxWidth: 275 }}
+            />
+          )}
+          <Form.Field className="form-field" error={addressError}>
             <label>Address</label>
             <input placeholder="Address" name="address" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field className="form-field">
+          {addressError && (
+            <Message
+              error
+              header="Address is required."
+              style={{ display: 'block', maxWidth: 275 }}
+            />
+          )}
+          <Form.Field className="form-field" error={cityError}>
             <label>City</label>
             <input placeholder="City" name="city" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field className="form-field">
+          {cityError && (
+            <Message
+              error
+              header="City is required."
+              style={{ display: 'block', maxWidth: 275 }}
+            />
+          )}
+          <Form.Field className="form-field" error={stateError}>
             <label>State</label>
-            <input placeholder="State" name="state" onChange={this.handleChange} />
+            <input maxLength="2" placeholder="State" name="state" onChange={this.handleChange} />
           </Form.Field>
-          <Form.Field className="form-field">
+          {stateError && (
+            <Message
+              error
+              header="Please enter valid State."
+              style={{ display: 'block', maxWidth: 275 }}
+            />
+          )}
+          <Form.Field className="form-field" error={zipError}>
             <label>ZIP</label>
-            <input placeholder="ZIP" name="zip" onChange={this.handleChange} />
+            <input maxLength="5" placeholder="ZIP" name="zip" onChange={this.handleChange} />
           </Form.Field>
+          {zipError && (
+            <Message
+              error
+              header="Please enter valid zip."
+              style={{ display: 'block', maxWidth: 275 }}
+            />
+          )}
           <div className="form-button">
             <Button color="green" type="submit">Place Order</Button>
           </div>
@@ -71,10 +130,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit(evt, localState, cart, user) {
-      const { email, address, city, state, zip } = localState;
-      console.log(user.id)
-      dispatch(addOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: cart, userId: user.id, cartId: cart.id }));
+    submitOrder(order) {
+      dispatch(addOrder(order));
     }
   };
 };
