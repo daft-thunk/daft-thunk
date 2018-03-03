@@ -13,6 +13,29 @@ export const fetchCart = cartId => dispatch => {
     .catch(console.error);
 };
 
+export const initCart = () => dispatch => {
+  if (!localStorage.cart){
+    axios.post('/api/cart')
+    .then(res => res.data)
+    .then(cart => {
+    localStorage.cart = cart.id;
+    dispatch(fetchCart(cart.id));
+  })
+  .catch(console.error);
+  }
+  else {
+  dispatch(fetchCart(localStorage.cart));
+  }
+}
+
+// export const getUserCart = userId => dispatch =>  {
+//   axios.get(`/api/${userId}/cart`)
+//   .then(cart => {
+//     if (cart.products.length > 0){
+//       dispatch()
+//     }
+//   })
+// }
 
 export const addProductToCart = (cartId, productId) => dispatch => {
   axios.post(`/api/cart/${cartId}`, productId)
