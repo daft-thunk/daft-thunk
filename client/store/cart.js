@@ -26,16 +26,22 @@ export const initCart = () => dispatch => {
   else {
   dispatch(fetchCart(localStorage.cart));
   }
-}
+};
 
-// export const getUserCart = userId => dispatch =>  {
-//   axios.get(`/api/${userId}/cart`)
-//   .then(cart => {
-//     if (cart.products.length > 0){
-//       dispatch()
-//     }
-//   })
-// }
+export const getUserCart = (userId, currentCart) => dispatch =>  {
+  axios.get(`/api/users/${userId}/cart`)
+  .then(res => res.data)
+  .then(cart => {
+    if (cart && !currentCart.products.length){
+        dispatch(fetchCart(cart.id));
+        axios.delete(`api/cart/${currentCart.id}`);
+        localStorage.clear();
+      }
+      else {
+        axios.put(`/api/users/${userId}/cart`, { cartId: currentCart.id });
+    }
+  });
+};
 
 export const addProductToCart = (cartId, productId) => dispatch => {
   axios.post(`/api/cart/${cartId}`, productId)
