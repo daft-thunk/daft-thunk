@@ -29,11 +29,10 @@ class UserOrders extends Component {
                 <ul style={{marginRight: 10}}>
                   <li>Email: {order.email}</li>
                   <li>Mailing Address: {order.mailingAddress}</li>
-                  <li>Cart Id:{order.cartId}</li>
                   <li>Status: {order.status}</li>
-                  <li>Date Ordered: {order.dateOrdered}</li>
-                  <li>Date Shipped: {order.dateShipped}</li>
-                  <li>Date Arrived: {order.dateArrived}</li>
+                  <li>Date Ordered: {order.dateOrdered.toString()}</li>
+                  <li>Date Shipped: {order.dateShipped ? order.dateShipped.toString() : 'Has Not Shipped'}</li>
+                  <li>Date Arrived: {order.dateArrived ? order.dateArrived : 'Has Not Arrived'}</li>
                 </ul>
                 <OrderDetail products={order.purchasedCart.products} />
               </div>
