@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review, Checkout, Confirmation } from './components';
-import store, {me, initCart } from './store';
+import store, {me, initCart, getUserCart } from './store';
 import axios from 'axios';
 
 /**
@@ -15,9 +15,10 @@ class Routes extends Component {
     this.props.loadCart();
   }
 
-  componentWillUpdate(){
-    if (this.props.user.id){
-
+  componentDidUpdate(){
+    if (this.props.user.id && !this.props.cart.userId && this.props.cart.id){
+      console.log(this.props.cart)
+      this.props.linkCart(this.props.user.id, this.props.cart);
     }
   }
 
@@ -74,6 +75,9 @@ const mapDispatch = (dispatch) => {
     },
     loadCart (){
       dispatch(initCart());
+    },
+    linkCart(userId, currentCart){
+      dispatch(getUserCart(userId, currentCart));
     }
   };
 };
