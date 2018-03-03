@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { getOrdersThunk } from '../store/orders';
 import store from '../store';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Table } from 'semantic-ui-react';
 
 class Orders extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filteredOrders: [],
-      status: 'All'
+      status: 'All',
+      changeOrderStatus: ''
     };
   }
 
@@ -19,20 +20,34 @@ class Orders extends Component {
     this.props.fetchOrders();
   }
 
-  handleChange = (evt) => {
+  handleSubmit = (evt, orderId, orderStatus) => {
     evt.preventDefault();
+    const status = this.state.changeOrderStatus;
+    console.log('status / orderId', status, orderId);
+    if (status === '' || status === orderStatus) return;
+    // else, save the new status to db
+  };
+
+  handleOrderStatusChange = evt => {
+    const status = evt.target.value;
+    this.setState({ changeOrderStatus: status }, () => {
+      // console.log(this.state);
+    });
+  };
+
+  handleViewChange = evt => {
     const status = evt.target.value;
     if (status === 'All') {
-      this.setState({filteredOrders: [], status});
+      this.setState({ filteredOrders: [], status });
     } else {
       const filteredOrders = this.props.orders.filter(order => {
         return order.status === status;
       });
-      this.setState({filteredOrders, status}, () => {
+      this.setState({ filteredOrders, status }, () => {
         // console.log(this.state);
       });
     }
-  }
+  };
 
   render() {
     let allOrders = this.props.orders;
@@ -43,29 +58,73 @@ class Orders extends Component {
       <div>
         <h1>Orders: Admin Panel</h1>
         <h3>{this.state.status} orders</h3>
-        <Form.Field label="Filter orders by category:" control="select" onChange={this.handleChange}>
+        <Form.Field
+          label="Filter orders by category:"
+          control="select"
+          onChange={this.handleViewChange}
+        >
           <option value="All">All</option>
           <option value="Created">Created</option>
           <option value="Processing">Processing</option>
           <option value="Completed">Completed</option>
           <option value="Cancelled">Cancelled</option>
         </Form.Field>
-        <div className="flex">
+        <div className="">
           {ordersToDisplay.map(order => {
             if (order.purchasedCart) {
-              console.log('cart', order.purchasedCart);
+              // console.log('cart', order.purchasedCart);
             }
             return (
-              <ul key={order.id}>
-                <li>User Id: {order.userId}</li>
-                <li>User Email: {order.email}</li>
-                <li>Status: {order.status}</li>
-                <li>Cart Id:{order.cartId}</li>
-                <li>Date Ordered: {order.dateOrdered}</li>
-                <li>Date Shipped: {order.dateShipped}</li>
-                <li>Date Arrived: {order.dateArrived}</li>
-                <li>Mailing Address: {order.mailingAddress}</li>
-              </ul>
+              <Table celled key={order.id}>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Order Id</Table.HeaderCell>
+                    <Table.HeaderCell>User Id</Table.HeaderCell>
+                    <Table.HeaderCell>User Email</Table.HeaderCell>
+                    <Table.HeaderCell>Status</Table.HeaderCell>
+                    <Table.HeaderCell>Cart Id</Table.HeaderCell>
+                    <Table.HeaderCell>Date Ordered</Table.HeaderCell>
+                    <Table.HeaderCell>Date Shipped</Table.HeaderCell>
+                    <Table.HeaderCell>Date Arrived</Table.HeaderCell>
+                    <Table.HeaderCell>Mailing Address</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Cell>{order.id}</Table.Cell>
+                    <Table.Cell>{order.userId}</Table.Cell>
+                    <Table.Cell>{order.email}</Table.Cell>
+                    <Table.Cell>
+                      <h4>{order.status}</h4>
+                      <br />
+                      <Form
+                        onSubmit={evt => {
+                          this.handleSubmit(evt, order.id, order.status);
+                        }}
+                      >
+                        <Form.Field
+                          label=""
+                          control="select"
+                          onChange={this.handleOrderStatusChange}
+                        >
+                          <option value="">--Change Status--</option>
+                          <option value="Created">Created</option>
+                          <option value="Processing">Processing</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </Form.Field>
+                        <Form.Button type="submit">Save Changes</Form.Button>
+                      </Form>
+                    </Table.Cell>
+                    <Table.Cell>{order.cartId}</Table.Cell>
+                    <Table.Cell>{order.dateOrdered}</Table.Cell>
+                    <Table.Cell>{order.dateShipped}</Table.Cell>
+                    <Table.Cell>{order.dateArrived}</Table.Cell>
+                    <Table.Cell>{order.mailingAddress}</Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
             );
           })}
         </div>
