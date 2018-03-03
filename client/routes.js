@@ -3,19 +3,26 @@ import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review, Checkout, Confirmation } from './components';
-import {me} from './store';
+import store, {me, initCart } from './store';
+import axios from 'axios';
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount () {
+  componentWillMount(){
     this.props.loadInitialData();
+    this.props.loadCart();
+  }
+
+  componentWillUpdate(){
+    if (this.props.user.id){
+
+    }
   }
 
   render () {
     const {isLoggedIn, isAdmin} = this.props;
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -53,6 +60,7 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    cart: state.cart,
     isLoggedIn: !!state.user.id,
     user: state.user,
     isAdmin: state.user.role === 'admin'
@@ -63,6 +71,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me());
+    },
+    loadCart (){
+      dispatch(initCart());
     }
   };
 };
