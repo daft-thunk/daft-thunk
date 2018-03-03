@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import { getOrdersThunk } from '../store/orders';
+import { getOrdersThunk, changeOrderThunk } from '../store/orders';
 import store from '../store';
 import { Button, Form, Table } from 'semantic-ui-react';
 
@@ -26,6 +26,12 @@ class Orders extends Component {
     console.log('status / orderId', status, orderId);
     if (status === '' || status === orderStatus) return;
     // else, save the new status to db
+    this.props
+      .changeOrder({ status, id: orderId })
+      .then(() => {
+        this.props.fetchOrders();
+      })
+      .catch(console.error);
   };
 
   handleOrderStatusChange = evt => {
@@ -53,7 +59,7 @@ class Orders extends Component {
     let allOrders = this.props.orders;
     let filteredOrders = this.state.filteredOrders;
     const ordersToDisplay = filteredOrders.length ? filteredOrders : allOrders;
-
+    // console.log('state:', this.state);
     return (
       <div>
         <h1>Orders: Admin Panel</h1>
@@ -70,7 +76,11 @@ class Orders extends Component {
           <option value="Cancelled">Cancelled</option>
         </Form.Field>
         <div className="">
-          {ordersToDisplay.map(order => {
+          {ordersToDisplay
+            .sort((a, b) => {
+              return a.id > b.id;
+            })
+            .map(order => {
             if (order.purchasedCart) {
               // console.log('cart', order.purchasedCart);
             }
@@ -140,7 +150,10 @@ const mapProps = state => ({
 const mapDispatch = dispatch => {
   return {
     fetchOrders() {
-      dispatch(getOrdersThunk());
+      return dispatch(getOrdersThunk());
+    },
+    changeOrder(order) {
+      return dispatch(changeOrderThunk(order));
     }
   };
 };
