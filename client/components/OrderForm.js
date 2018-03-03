@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addOrder } from '../store';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form, Message, Dropdown } from 'semantic-ui-react';
 
 /**
  * COMPONENT
