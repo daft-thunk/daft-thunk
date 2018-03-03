@@ -15,7 +15,7 @@ export const UserHome = (props) => {
       <h6>Our robot minions are working on your order. They will email you updates regarding your purchase shortly</h6>
       <div>
         <Button as={Link} to="/" color="google plus">Return Home</Button>
-        <Button as={Link} to="/home" color="blue">View Order History</Button>
+        <Button as={Link} to="/profile" color="blue">View Order History</Button>
       </div>
     </div>
   );
