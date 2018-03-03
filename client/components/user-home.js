@@ -7,7 +7,6 @@ import UserOrders from './UserOrders';
  * COMPONENT
  */
 export const UserHome = (props) => {
-  // console.log('user home props:', props);
   const {email} = props;
 
   return (
