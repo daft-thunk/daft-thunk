@@ -1,6 +1,5 @@
 import axios from 'axios';
 import history from '../history';
-import { fetchCart } from './index';
 
 /**
  * ACTION TYPES
@@ -27,7 +26,6 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res => {
         dispatch(getUser(res.data || defaultUser));
-        return res.data.id;
       })
       .catch(err => console.log(err));
   };
@@ -70,13 +68,3 @@ export default function (state = defaultUser, action) {
   }
 }
 
-
-// .then(userId => {
-//   axios.get(`/api/users/${userId}/cart`)
-//   .then(res => {
-//     if (!res.data){
-//       axios.put(`/api/users/${userId}/cart`, { cartId: document.cookie});
-//     }
-//     else console.log('already has cart assigned')
-//   })
-// })
