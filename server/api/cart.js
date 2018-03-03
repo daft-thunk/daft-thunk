@@ -35,6 +35,12 @@ router.put('/:id', (req, res, next) => {
   .catch(next);
 });
 
+//delete a cart
+router.delete('/:id', (req, res, next) => {
+  Cart.destroy({where: { id: req.params.id }})
+  res.send(204)
+})
+
 // delete product from the cart
 router.delete('/:id', (req, res, next) => {
   Cart_To_Product.findOne({
