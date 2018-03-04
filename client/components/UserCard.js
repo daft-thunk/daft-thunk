@@ -2,24 +2,45 @@ import React from 'react';
 import { Form, Radio, Button, Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {changeUserThunk} from '../store/users';
 // import { setProduct, addProductToCart } from '../store';
 
 class UserCard extends React.Component {
-  state = {}
-  handleChange = (e, { value }) => this.setState({ value })
+  state = {
+    value: this.props.user.role
+  }
+  checkedBool = (val) => {
+    return this.state.value === val;
+  }
+
+  handleChange = (e, { value }) => {
+    this.props.changeUserRole({role: value, id: this.props.user.id})
+    .then(() => {
+      this.setState({ value }, () => {
+        console.log('changed. state', this.state);
+      });
+    })
+    .catch(console.error);
+  }
 
   render() {
-    console.log('user card', this.props);
+    // console.log('user card', this.props);
     const { user } = this.props;
     return (
-      <Card raised style={{ margin: '0 5px 10px 5px' }}>
+      <Card raised style={{ margin: '0 5px 10px 5px'}}>
         <Card.Content>
           <Card.Content>
             <Card.Header>
               <div className="flex" style={{ justifyContent: 'space-around' }}>
                 <Icon name="user" size="big" />
                 user.fullName
-                <Icon link name="close" size="big" />
+                <Icon
+                  link
+                  name="close"
+                  size="big"
+                  onClick={() => {
+                    console.log('clicked!');
+                  }} />
               </div>
             </Card.Header>
           </Card.Content>
@@ -29,27 +50,25 @@ class UserCard extends React.Component {
           <Card.Content>{user.email}</Card.Content>
           <Card.Content>user.mailingAddress</Card.Content>
           <Card.Content>
-            user.role | radio buttons | Change (button)
             <Form>
-              <Form.Field>
-                Selected value: <b>{this.state.value}</b>
-              </Form.Field>
-              <Form.Field>
-                <Radio
-                defaultChecked
-                  label="User"
-                  name="radioGroup"
-                  value="user"
-                  checked={this.state.value === 'user'}
-                  onChange={this.handleChange}
-                />
+              <Form.Field style={{display: 'block'}}>
+              <b>Role: {this.state.value}</b>
               </Form.Field>
               <Form.Field>
                 <Radio
                   label="Admin"
                   name="radioGroup"
                   value="admin"
-                  checked={this.state.value === 'admin'}
+                  checked={this.checkedBool('admin')}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Radio
+                  label="User"
+                  name="radioGroup"
+                  value="user"
+                  checked={this.checkedBool('user')}
                   onChange={this.handleChange}
                 />
               </Form.Field>
@@ -66,9 +85,9 @@ const mapProps = state => ({
 });
 
 const mapDispatch = (dispatch, ownProps) => ({
-  // handleClick(){
-  //   dispatch(setProduct(ownProps.product));
-  // },
+  changeUserRole(user){
+    return dispatch(changeUserThunk(user));
+  },
   // handleAddToCart(cartId, productId) {
   //   dispatch(addProductToCart(cartId, { productId } ));
   // }
