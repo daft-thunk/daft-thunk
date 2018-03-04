@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { getOrdersThunk, changeOrderThunk } from '../store/orders';
-import store from '../store';
+import OrderDetail from './OrderDetail';
 import { Button, Form, Table } from 'semantic-ui-react';
 
 class Orders extends Component {
@@ -101,11 +101,11 @@ class Orders extends Component {
               <Table celled key={order.id}>
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell>Order Id</Table.HeaderCell>
-                    <Table.HeaderCell>User Id</Table.HeaderCell>
+                    <Table.HeaderCell>Order ID</Table.HeaderCell>
+                    <Table.HeaderCell>User ID</Table.HeaderCell>
                     <Table.HeaderCell>User Email</Table.HeaderCell>
                     <Table.HeaderCell>Status</Table.HeaderCell>
-                    <Table.HeaderCell>Cart Id</Table.HeaderCell>
+                    <Table.HeaderCell>Cart ID</Table.HeaderCell>
                     <Table.HeaderCell>Date Ordered</Table.HeaderCell>
                     <Table.HeaderCell>Date Shipped</Table.HeaderCell>
                     <Table.HeaderCell>Date Arrived</Table.HeaderCell>
@@ -115,7 +115,14 @@ class Orders extends Component {
 
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell>{order.id}</Table.Cell>
+                    <Table.Cell>{order.id}
+                    <br />
+                    {
+                      // we can remove this logic later
+                      order.purchasedCart &&
+                      <OrderDetail products={order.purchasedCart.products} />
+                    }
+                    </Table.Cell>
                     <Table.Cell>{order.userId}</Table.Cell>
                     <Table.Cell>{order.email}</Table.Cell>
                     <Table.Cell>
