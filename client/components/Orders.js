@@ -29,6 +29,16 @@ class Orders extends Component {
     this.props
       .changeOrder({ status, id: orderId })
       .then(() => {
+        const updatedFilteredOrders = this.state.filteredOrders.filter(order => {
+          return order.id !== orderId;
+        });
+        if (updatedFilteredOrders.length) {
+          this.setState({filteredOrders: updatedFilteredOrders});
+        } else {
+          this.setState({filteredOrders: [], status: 'All'});
+        }
+      })
+      .then(() => {
         this.props.fetchOrders();
       })
       .catch(console.error);
@@ -76,7 +86,10 @@ class Orders extends Component {
           <option value="Cancelled">Cancelled</option>
         </Form.Field>
         <div className="">
-          {ordersToDisplay
+          {
+            this.state.status !== 'All' && !ordersToDisplay.length ?
+            <h4>No {this.state.status} orders to display.</h4> :
+            ordersToDisplay
             .sort((a, b) => {
               return a.id > b.id;
             })
