@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Radio, Button, Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {changeUserThunk} from '../store/users';
-// import { setProduct, addProductToCart } from '../store';
+import {changeUserThunk, deleteUserThunk} from '../store/users';
 
-class UserCard extends React.Component {
+class UserCard extends Component {
   state = {
     value: this.props.user.role
   }
@@ -16,15 +15,16 @@ class UserCard extends React.Component {
   handleChange = (e, { value }) => {
     this.props.changeUserRole({role: value, id: this.props.user.id})
     .then(() => {
-      this.setState({ value }, () => {
-        console.log('changed. state', this.state);
-      });
+      this.setState({ value });
     })
     .catch(console.error);
   }
 
+  handleDeleteUser = () => {
+    this.props.deleteUser(this.props.user.id);
+  }
+
   render() {
-    // console.log('user card', this.props);
     const { user } = this.props;
     return (
       <Card raised style={{ margin: '0 5px 10px 5px'}}>
@@ -38,9 +38,7 @@ class UserCard extends React.Component {
                   link
                   name="close"
                   size="big"
-                  onClick={() => {
-                    console.log('clicked!');
-                  }} />
+                  onClick={this.handleDeleteUser} />
               </div>
             </Card.Header>
           </Card.Content>
@@ -88,9 +86,9 @@ const mapDispatch = (dispatch, ownProps) => ({
   changeUserRole(user){
     return dispatch(changeUserThunk(user));
   },
-  // handleAddToCart(cartId, productId) {
-  //   dispatch(addProductToCart(cartId, { productId } ));
-  // }
+  deleteUser(userId) {
+    return dispatch(deleteUserThunk(userId));
+  }
 });
 
 const Container = connect(mapProps, mapDispatch)(UserCard);
