@@ -29,3 +29,10 @@ router.put('/:id/cart', (req, res, next) => {
     .catch(next);
 });
 
+router.put('/:id', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => user.update({role: req.body.role}))
+    .then(() => res.sendStatus(201))
+    .catch(next);
+});
+
