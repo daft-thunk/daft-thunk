@@ -36,3 +36,9 @@ router.put('/:id', (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/:id', (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => user.destroy())
+    .then(() => res.sendStatus(204))
+    .catch(next);
+});
