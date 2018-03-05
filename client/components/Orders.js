@@ -16,14 +16,12 @@ class Orders extends Component {
     };
   }
 
-  getOrderTotal(cart) {
+  static getOrderTotal(cart) {
     function totalReducer(acc, curProduct) {
       let price = curProduct.price * curProduct.cart_to_product.quantity;
       return acc + price;
     }
-
     let total = cart.products !== undefined ? cart.products.reduce(totalReducer, 0) : 0;
-
     return total;
   }
 
