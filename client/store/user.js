@@ -30,10 +30,6 @@ export const me = () =>
       .catch(err => console.log(err));
   };
 
-export const setUserCart = (userId, cartId) => {
-  axios.put(`/api/${userId}/`, { cartId });
-};
-
 export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })

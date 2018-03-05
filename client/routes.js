@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review, Checkout, Confirmation } from './components';
-import store, {me, initCart, getUserCart } from './store';
-import axios from 'axios';
+import {me, initCart, getUserCart } from './store';
 
 /**
  * COMPONENT
@@ -17,8 +16,13 @@ class Routes extends Component {
 
   componentDidUpdate(){
     if (this.props.user.id && !this.props.cart.userId && this.props.cart.id){
-      console.log(this.props.cart)
       this.props.linkCart(this.props.user.id, this.props.cart);
+    }
+    if (this.props.cart.userId){
+      if (this.props.user.id !== this.props.cart.userId){
+        localStorage.clear();
+        this.props.loadCart();
+      }
     }
   }
 
