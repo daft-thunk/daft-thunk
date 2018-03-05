@@ -44,7 +44,11 @@ class SingleProduct extends Component {
             let stars = String.fromCharCode(9733).repeat(review.rating);
             return (
               <div key={review.id}>
+              {review.user ?
                 <h2>{review.user.fullName}</h2>
+                :
+                <h2>anonymous</h2>
+              }
                 <h2>{stars}</h2>
                 <h3>{review.text}</h3>
                 <hr width="50%" />
