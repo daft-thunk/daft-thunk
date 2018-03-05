@@ -29,7 +29,6 @@ Order.belongsTo(User);
 
 User.hasOne(Cart);
 
-
 /**
  * Model exports below.
  * USAGE: const {User} = require('../db/models')

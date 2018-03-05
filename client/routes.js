@@ -10,16 +10,23 @@ import axios from 'axios';
  * COMPONENT
  */
 class Routes extends Component {
-  componentWillMount(){
+  componentDidMount(){
     this.props.loadInitialData();
-    this.props.loadCart();
+    if (!this.props.cart.user){
+      this.props.loadCart();
+    }
   }
 
   componentDidUpdate(){
     if (this.props.user.id && !this.props.cart.userId && this.props.cart.id){
-      console.log(this.props.cart)
       this.props.linkCart(this.props.user.id, this.props.cart);
     }
+  //   if (this.props.cart.userId){
+  //     if (this.props.user.id !== this.props.cart.userId){
+  //       localStorage.clear();
+  //       this.props.loadCart();
+  //     }
+  //   }
   }
 
   render () {
