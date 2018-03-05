@@ -16,6 +16,15 @@ class Orders extends Component {
     };
   }
 
+  static getOrderTotal(cart) {
+    function totalReducer(acc, curProduct) {
+      let price = curProduct.price * curProduct.cart_to_product.quantity;
+      return acc + price;
+    }
+    let total = cart.products !== undefined ? cart.products.reduce(totalReducer, 0) : 0;
+    return total;
+  }
+
   componentDidMount() {
     this.props.fetchOrders();
   }
@@ -120,7 +129,7 @@ class Orders extends Component {
                     {
                       // we can remove this logic later
                       order.purchasedCart &&
-                      <OrderDetail products={order.purchasedCart.products} />
+                      <OrderDetail products={order.purchasedCart.products} orderDate={order.dateOrdered} total={this.getOrderTotal(order.purchasedCart)} />
                     }
                     </Table.Cell>
                     <Table.Cell>{order.userId}</Table.Cell>

@@ -11,50 +11,48 @@ class Navbar extends Component {
     super(props);
     this.state = {};
   }
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   componentDidMount() {
     this.props.fetchAllProducts();
   }
 
   render() {
-    const { activeItem } = this.state;
     return (
       <Menu inverted={true}>
-      <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick}>
+      <Menu.Item as={Link} to="/" name="home" >
           Daft Thunk Direct
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/products" name="products" active={activeItem === 'products'} onClick={this.handleItemClick}>
+        <Menu.Item as={Link} to="/products" name="products">
           Products
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/cart" name="cart" active={activeItem === 'cart'} onClick={this.handleItemClick}>
+        <Menu.Item as={Link} to="/cart" name="cart">
           <Icon name="cart" />
           Cart
         </Menu.Item>
         <Menu.Menu position="right">
 
         {!this.props.isLoggedIn &&
-          <Menu.Item as={Link} to="/signup" name="signup" active={activeItem === 'signup'} onClick={this.handleItemClick}>
+          <Menu.Item as={Link} to="/signup" name="signup">
             Sign Up
           </Menu.Item>
         }
 
         {!this.props.isLoggedIn &&
-          <Menu.Item as={Link} to="/login" name="login" active={activeItem === 'login'} onClick={this.handleItemClick}>
+          <Menu.Item as={Link} to="/login" name="login">
             Login
           </Menu.Item>
         }
 
         {this.props.isLoggedIn &&
-          <Menu.Item as={Link} to="/profile" name="profile" active={activeItem === 'profile'} onClick={this.handleItemClick}>
+          <Menu.Item as={Link} to="/profile" name="profile">
             Profile
           </Menu.Item>
         }
 
         {this.props.isLoggedIn &&
-        <Menu.Item as={Link} to="/login" name="logout" active={activeItem === 'logout'} onClick={this.props.handleClick}>
+        <Menu.Item as={Link} to="/login" name="logout">
           Logout
         </Menu.Item>
         }

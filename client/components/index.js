@@ -20,3 +20,4 @@ export {default as Review} from './Review';
 export {default as Checkout} from './Checkout';
 export {default as Confirmation} from './Confirmation';
 export {default as Users} from './Users';
+export {default as Footer} from './footer';
