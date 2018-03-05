@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUserOrders } from '../store/orders';
-import { List } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react';
 
 import OrderDetail from './OrderDetail';
 // import { ProductSearch, ProductSelector, ProductCard } from './index';
@@ -36,12 +36,12 @@ class UserOrders extends Component {
             return (
               <div key={order.id}>
               <List celled>
-                <List.Item>Ordered: {order.dateOrdered.substring(0,10)}
+                <List.Item><span className="bold" >Ordered: {order.dateOrdered.substring(0, 10)} </span>
                   <List.List>
-                    <List.Item>Status: {order.status}</List.Item>
-                    <List.Item>Shipped: {order.dateShipped ? order.dateShipped.substring(0,10): 'Has Not Shipped'}</List.Item>
-                    <List.Item>Arrived: {order.dateArrived ? order.dateArrived.substring(0,10) : 'Has Not Arrived'} </List.Item>
-                    <List.Item>Mailing Address: {order.mailingAddress}</List.Item>
+                    <List.Item>Status: <span className="bold" >{order.status}</span></List.Item>
+                    <List.Item>Shipped: <span className="bold" >{order.dateShipped ? order.dateShipped.substring(0, 10) : 'Has Not Shipped'}</span></List.Item>
+                    <List.Item>Arrived: <span className="bold" >{order.dateArrived ? order.dateArrived.substring(0, 10) : 'Has Not Arrived'}</span></List.Item>
+                    <List.Item>Mailing Address: <span className="bold" >{order.mailingAddress}</span></List.Item>
                   </List.List>
                   <OrderDetail products={order.purchasedCart.products} orderDate={order.dateOrdered} />
                 </List.Item>
