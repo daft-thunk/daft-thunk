@@ -17,8 +17,13 @@ class Routes extends Component {
 
   componentDidUpdate(){
     if (this.props.user.id && !this.props.cart.userId && this.props.cart.id){
-      console.log(this.props.cart)
       this.props.linkCart(this.props.user.id, this.props.cart);
+    }
+    if (this.props.cart.userId){
+      if (this.props.user.id !== this.props.cart.userId){
+        localStorage.clear();
+        this.props.loadCart();
+      }
     }
   }
 
