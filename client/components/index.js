@@ -11,7 +11,7 @@ export {default as SingleProduct} from './SingleProduct';
 export {default as ProductSearch} from './ProductSearch';
 export {default as ProductSelector} from './ProductSelector';
 export {default as Cart} from './cart';
-export {default as Home} from './Home';
+export {default as Home} from './home';
 export {default as OrderForm} from './OrderForm';
 export {default as ProductCard} from './ProductCard';
 export {default as AltCarousel} from './AltCarousel';
