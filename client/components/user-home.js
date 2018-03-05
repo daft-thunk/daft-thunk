@@ -20,7 +20,7 @@ export const UserHome = (props) => {
         <h1>Wanna do some admin stuff?</h1>
         <Button as={Link} to="/admin/orders">Manage Orders</Button>
         <Button as={Link} to="/admin/users">Manage Users</Button>
-        <Button as={Link} to="/admin/products">Manage Products</Button>
+        <Button as={Link} to="/admin/product-add">Add Product</Button>
         </div>
       }
       <UserOrders userId={props.userId} />
