@@ -37,7 +37,7 @@ class SingleProduct extends Component {
           {/* send userId to <Review> */}
         {
           this.props.product.id &&
-          <Review productId={this.props.product.id} userId={1} />
+          <Review productId={this.props.product.id} userId={this.props.userId} />
         }
         {this.props.product.reviews &&
           this.props.product.reviews.map(review => {
@@ -58,7 +58,8 @@ class SingleProduct extends Component {
 
 const mapProps = state => ({
   product: state.activeProduct,
-  cartId: state.cart.id
+  cartId: state.cart.id,
+  userId: state.user.id
 });
 
 const mapDispatch = (dispatch, ownProps) => ({

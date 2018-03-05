@@ -12,21 +12,16 @@ import axios from 'axios';
 class Routes extends Component {
   componentDidMount(){
     this.props.loadInitialData();
+    //if no user is logged in create a cart
     if (!this.props.cart.user){
       this.props.loadCart();
     }
   }
-
+  //link the created cart to the logged in user or overide it with the users saved cart if the created cart is empty.
   componentDidUpdate(){
     if (this.props.user.id && !this.props.cart.userId && this.props.cart.id){
       this.props.linkCart(this.props.user.id, this.props.cart);
     }
-  //   if (this.props.cart.userId){
-  //     if (this.props.user.id !== this.props.cart.userId){
-  //       localStorage.clear();
-  //       this.props.loadCart();
-  //     }
-  //   }
   }
 
   render () {

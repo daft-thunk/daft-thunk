@@ -11,7 +11,7 @@ const REMOVE_USER = 'REMOVE_USER';
 /**
  * INITIAL STATE
  */
-const defaultUser = {};
+export const defaultUser = {};
 
 /**
  * ACTION CREATORS
@@ -43,26 +43,26 @@ export const auth = (email, password, method) =>
 
 export const logout = () =>
   dispatch => {
-    localStorage.clear()
-    axios.post('/auth/logout')
+    // localStorage.clear();
+    return axios.post('/auth/logout')
       .then(_ => {
         dispatch(removeUser());
         dispatch(initCart());
         history.push('/login');
       })
       .catch(err => console.log(err));
-  }
+  };
 
 
 /**
  * REDUCER
  */
-export default function (state = defaultUser, action) {
+export default function (state = {}, action) {
   switch (action.type) {
     case GET_USER:
       return action.user;
     case REMOVE_USER:
-      return defaultUser;
+      return {};
     default:
       return state;
   }

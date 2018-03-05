@@ -24,19 +24,22 @@ export const getUsersThunk = () => dispatch => {
     .catch(err => console.error(`Fetching users unsuccessful`, err));
 };
 
-export const changeUserThunk = (user) => dispatch => {
-  return axios
-    .put(`/api/users/${user.id}`, user)
-    // .then(res => dispatch(changeUser(res.data)))
-    .then(res => {console.log(CHANGE_USER, res.data);})
-    .catch(err => console.error(`Updating user: ${user} unsuccessful`, err));
+export const changeUserThunk = user => dispatch => {
+  return (
+    axios
+      .put(`/api/users/${user.id}`, user)
+      .then(res => dispatch(changeUser(res.data)))
+      .catch(err => console.error(`Updating user: ${user} unsuccessful`, err))
+  );
 };
 
-export const deleteUserThunk = (userId) => dispatch => {
+export const deleteUserThunk = userId => dispatch => {
   return axios
     .delete(`/api/users/${userId}`)
     .then(res => dispatch(deleteUser(userId)))
-    .catch(err => console.error(`Deleting user id #${userId} unsuccessful`, err));
+    .catch(err =>
+      console.error(`Deleting user id #${userId} unsuccessful`, err)
+    );
 };
 
 /**
@@ -46,6 +49,12 @@ export default function(state = [], action) {
   switch (action.type) {
     case GET_USERS:
       return action.users;
+    case CHANGE_USER: {
+      const otherUsers = state.filter(user => {
+        return user.id !== action.user.id;
+      });
+      return [action.user, ...otherUsers];
+    }
     case DELETE_USER:
       return state.filter(user => user.id !== action.userId);
     default:

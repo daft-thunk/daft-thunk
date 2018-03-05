@@ -5,9 +5,13 @@ import { connect } from 'react-redux';
 import {changeUserThunk, deleteUserThunk} from '../store/users';
 
 class UserCard extends Component {
-  state = {
-    value: this.props.user.role
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: this.props.user.role
+    };
   }
+
   checkedBool = (val) => {
     return this.state.value === val;
   }
@@ -33,7 +37,7 @@ class UserCard extends Component {
             <Card.Header>
               <div className="flex" style={{ justifyContent: 'space-around' }}>
                 <Icon name="user" size="big" />
-                user.fullName
+                <span style={{ fontSize: '1.5em' }}>User ID: {user.id}</span>
                 <Icon
                   link
                   name="close"
@@ -42,11 +46,15 @@ class UserCard extends Component {
               </div>
             </Card.Header>
           </Card.Content>
-          <Card.Meta>
-            <span className="date">#{user.id}</span>
-          </Card.Meta>
+          <Card.Content>
+          {
+            (user.fullName == 'null null') ?
+            <span style={{color: 'rgba(0,0,0,.4)'}}>name: n/a</span>
+            :
+            <span>{user.fullName}</span>
+          }
+          </Card.Content>
           <Card.Content>{user.email}</Card.Content>
-          <Card.Content>user.mailingAddress</Card.Content>
           <Card.Content>
             <Form>
               <Form.Field style={{display: 'block'}}>
