@@ -20,9 +20,9 @@ form div {
   display: inline-block;
 }
 
-.site-container {
+/* .site-container {
   padding: 0 8px;
-}
+} */
 
 .flex {
   display: flex;
@@ -138,4 +138,47 @@ form div {
   display: block;
   position: relative;
 }
+
+#formContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: url("https://c.pxhere.com/photos/55/a3/audience_band_concert_crowd_fans_festival_hands_lights-915242.jpg!d") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#authForm {
+  width: 50vw;
+  height: 50vh;
+  margin: auto;
+  background: rgba(152, 230, 230, 0.221);
+}
+
+#form-inputs {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs {
+  width: 80%;
+  align-self: center;
+}
+
+.inputs input{
+  width: 100%;
+  height: 3em;
+}
+
+#authImage{
+  display: flex;
+}
+
+#authImage img{
+  margin: auto;
+}
+
 
