@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ProductCard, AltCarousel } from './index';
 // <Carousel className="carousel"/>
 
-function Home(props){
+export function Home(props){
   return (
     <div>
       <div className="altcarousel">

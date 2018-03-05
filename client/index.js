@@ -6,6 +6,7 @@ import history from './history';
 import store, { increment, fetchCart } from './store';
 import App from './app';
 import axios from 'axios';
+import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
 // establishes socket connection
