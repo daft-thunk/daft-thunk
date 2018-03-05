@@ -28,6 +28,10 @@ form div {
   display: flex;
 }
 
+.bold {
+  font-weight: 700;
+}
+
 .center {
   position: absolute;
   left: 48vw;
