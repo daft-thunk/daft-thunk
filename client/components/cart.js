@@ -57,6 +57,7 @@ class Cart extends Component {
   }
 
   render() {
+    console.log(this.props.cart)
     // add up cost for cart
     function totalReducer(acc, curProduct) {
       let price = curProduct.price * curProduct.cart_to_product.quantity;
