@@ -16,15 +16,23 @@ class UserOrders extends Component {
   render() {
 
     if (!this.props.userId) {
-      return <h3>Loading...</h3>;
+      return (
+        <h3>Loading...</h3>
+      );
     }
     let userOrders = this.props.orders;
+    // console.log('userOrders:', userOrders);
     return (
       <div>
+      {
+        userOrders.length ?
         <h3>Your orders:</h3>
+        :
+        <h3>No past orders to display. <Link to="/">View our featured products.</Link></h3>
+      }
         <div>
           {userOrders.map(order => {
-            console.log(order.products)
+            // console.log(order.purchasedCart);
             return (
               <div key={order.id}>
               <List celled>

@@ -21,10 +21,20 @@ router.get('/by/:userId', (req, res, next) => {
     .then(user => user.getOrders())
     .then(orders => res.json(orders))
     .catch(next);
-})
+});
 
 router.post('/', (req, res, next) => {
   Order.create(req.body)
     .then(order => res.status(201).json(order))
+    .catch(next);
+});
+
+router.put('/:orderId', (req, res, next) => {
+  Order.findById(+req.params.orderId)
+    .then(orderInstance => {
+      console.log(orderInstance.get());
+      return orderInstance.update({status: req.body.status});
+    })
+    .then(updatedOrder => res.json(updatedOrder))
     .catch(next);
 });
