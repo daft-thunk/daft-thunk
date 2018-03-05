@@ -26,6 +26,10 @@ const OrderDetail = (props) => (
           })
         }
       </Segment.Group>
+      <div className="ui grid">
+        <p className="bold four wide column">Total:</p>
+        <p className="four wide column">${props.total}</p>
+      </div>
     </Modal.Content>
   </Modal>
 );

@@ -13,6 +13,17 @@ class UserOrders extends Component {
     this.props.getUserOrders(this.props.userId);
   }
 
+  getOrderTotal(cart) {
+    function totalReducer(acc, curProduct) {
+      let price = curProduct.price * curProduct.cart_to_product.quantity;
+      return acc + price;
+    }
+
+    let total = cart.products !== undefined ? cart.products.reduce(totalReducer, 0) : 0;
+
+    return total;
+  }
+
   render() {
 
     if (!this.props.userId) {
@@ -43,7 +54,7 @@ class UserOrders extends Component {
                     <List.Item>Arrived: <span className="bold" >{order.dateArrived ? order.dateArrived.substring(0, 10) : 'Has Not Arrived'}</span></List.Item>
                     <List.Item>Mailing Address: <span className="bold" >{order.mailingAddress}</span></List.Item>
                   </List.List>
-                  <OrderDetail products={order.purchasedCart.products} orderDate={order.dateOrdered} />
+                  <OrderDetail products={order.purchasedCart.products} orderDate={order.dateOrdered} total={this.getOrderTotal(order.purchasedCart)} />
                 </List.Item>
               </List>
               </div>
