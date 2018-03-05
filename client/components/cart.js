@@ -58,12 +58,12 @@ class Cart extends Component {
 
   render() {
     // add up cost for cart
-    function reducer(acc, curProduct) {
+    function totalReducer(acc, curProduct) {
       let price = curProduct.price * curProduct.cart_to_product.quantity;
       return acc + price;
     }
 
-    let total = this.props.cart.products !== undefined ? this.props.cart.products.reduce(reducer, 0) : 0;
+    let total = this.props.cart.products !== undefined ? this.props.cart.products.reduce(totalReducer, 0) : 0;
 
     return (
       <div>

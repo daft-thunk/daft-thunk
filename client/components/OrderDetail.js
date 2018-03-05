@@ -4,7 +4,7 @@ import { Button, Header, Segment, Modal } from 'semantic-ui-react';
 
 const OrderDetail = (props) => (
   <Modal trigger={<Button className="order-detail-button">Order Detail</Button>}>
-    <Modal.Header>Your Order</Modal.Header>
+    <Modal.Header>{props.orderDate.substring(0, 10)}</Modal.Header>
     <Modal.Content>
       <Segment.Group>
         <Segment className="ui grid order-product">
@@ -22,11 +22,9 @@ const OrderDetail = (props) => (
                 <p className="four wide column">x{product.cart_to_product.quantity}</p>
                 <Button as={Link} to={`/products/${product.id}`} className="two wide column">Rate Product</Button>
               </Segment>
-            )
+            );
           })
         }
-
-
       </Segment.Group>
     </Modal.Content>
   </Modal>
