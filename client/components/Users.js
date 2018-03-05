@@ -15,17 +15,41 @@ class Users extends Component {
 
   render() {
     const users = this.props.users;
+    const admins = users.filter(user => {
+      return user.role === 'admin';
+    });
+    const usersWithUserRole = users.filter(user => {
+      return user.role === 'user';
+    });
+    // console.log('USERS:', users);
     return (
-      <div className="flex" style={{ flexWrap: 'wrap', justifyContent: 'space-around' }}>
-      {
-        users.map(user => {
-          return (
-            <div key={user.id}>
-              <UserCard user={user} />
-            </div>
-          );
-        })
-      }
+      <div>
+        <h2>Admins:</h2>
+        <div
+          className="flex"
+          style={{ flexWrap: 'wrap', justifyContent: 'space-around' }}
+        >
+          {admins.map(user => {
+            return (
+              <div key={user.id}>
+                <UserCard user={user} />
+              </div>
+            );
+          })}
+        </div>
+        <h2>Users:</h2>
+        <div
+          className="flex"
+          style={{ flexWrap: 'wrap', justifyContent: 'space-around' }}
+        >
+          {usersWithUserRole.map(user => {
+            return (
+              <div key={user.id}>
+                <UserCard user={user} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
@@ -39,10 +63,10 @@ const mapDispatch = dispatch => {
   return {
     fetchUsers() {
       return dispatch(getUsersThunk());
-    },
-  //   changeOrder(order) {
-  //     return dispatch(changeOrderThunk(order));
-  //   }
+    }
+    //   changeOrder(order) {
+    //     return dispatch(changeOrderThunk(order));
+    //   }
   };
 };
 
