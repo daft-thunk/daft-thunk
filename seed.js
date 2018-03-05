@@ -24,15 +24,75 @@ const testUserData = {
 };
 
 function generateProducts() {
-  const products = _.times(25, () =>
-    Product.build({
-      name: faker.hacker.noun(),
-      price: (Math.random() * 1000).toFixed(2),
-      description: faker.lorem.paragraph(4),
-      manufacturer: faker.company.companyName(),
-      stock: Math.floor(Math.random() * Math.floor(20))
-    })
-  );
+  let data = [{
+    name: 'Fender Telecaster',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Fender',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/fender-telecaster.png'
+  },
+  {
+    name: 'Gibson Les Paul',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Gibson',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/les-paul-tribute.png'
+  },
+  {
+    name: 'Martin X',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Martin',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/martin-x.png'
+  },
+  {
+    name: 'Fender Precision Bass',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Martin',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/fender-p.png'
+  },
+  {
+    name: 'Martin X',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Martin',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/martin-x.png'
+  },
+  {
+    name: 'Korg microKORG',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Korg',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/micro-korg.png'
+  },
+  {
+    name: 'Moog Sub-37',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'Moog',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/moog-sub37.png'
+  },
+  {
+    name: 'DW Performance Series',
+    price: (Math.random() * 1000).toFixed(2),
+    description: faker.lorem.paragraph(4),
+    manufacturer: 'DW',
+    stock: Math.floor(Math.random() * Math.floor(20)),
+    imageUrl: '/images/dw-performance.png'
+  }];
+
+  let products = [];
+  data.forEach(product => {
+    products.push(Product.build(product));
+  });
   return products;
 }
 
@@ -40,7 +100,8 @@ function generateCategories() {
   const categories = [
     Category.build({ name: 'Guitar' }),
     Category.build({ name: 'Drum' }),
-    Category.build({ name: 'Bass' })
+    Category.build({ name: 'Bass' }),
+    Category.build({ name: 'Keyboard' })
   ];
   return categories;
 }
@@ -157,17 +218,25 @@ async function seed() {
   const cat1 = await Category.findOne({ where: { name: 'Guitar' } });
   const cat2 = await Category.findOne({ where: { name: 'Drum' } });
   const cat3 = await Category.findOne({ where: { name: 'Bass' } });
+  const cat4 = await Category.findOne({ where: { name: 'Keyboard' } });
 
-  const guitar1 = await Product.findById(10);
-  const guitar2 = await Product.findById(11);
-  const guitar3 = await Product.findById(12);
+  const guitar1 = await Product.findById(1);
+  const guitar2 = await Product.findById(2);
+  const guitar3 = await Product.findById(3);
+  const guitar4 = await Product.findById(5);
 
   const drum1 = await Product.findById(8);
-  const bass1 = await Product.findById(9);
 
-  await cat1.addProducts([guitar1, guitar2, guitar3]);
+  const bass1 = await Product.findById(4);
+
+  const keys1 = await Product.findById(6);
+  const keys2 = await Product.findById(7);
+
+  await cat1.addProducts([guitar1, guitar2, guitar3, guitar4]);
   await cat2.addProduct(drum1);
   await cat3.addProduct(bass1);
+
+  await cat4.addProduct(keys1, keys2);
 
   //reviews to users and products
   const user1 = await User.findById(2);

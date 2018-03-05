@@ -185,4 +185,12 @@ form div {
   margin: auto;
 }
 
+.product-card {
+  padding-top: 10px;
+}
 
+.ui.card>:first-child, .ui.cards>.card>:first-child {
+  border-radius: .28571429rem .28571429rem 0 0!important;
+  border-top: none!important;
+  height: 325px;
+}
