@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review, Checkout, Confirmation } from './components';
-import {me, initCart, getUserCart } from './store';
+import { Login, Signup, UserHome, Products, SingleProduct, Cart, Home, Orders, Review, Checkout, Confirmation, Users } from './components';
+import store, {me, initCart, getUserCart } from './store';
+import axios from 'axios';
 
 /**
  * COMPONENT
@@ -47,7 +48,10 @@ class Routes extends Component {
               <Route path="/review" component={Review} />
               {
                 isAdmin &&
+                <Switch>
                 <Route path="/admin/orders/" component={Orders} />
+                <Route path="/admin/users/" component={Users} />
+                </Switch>
               }
             </Switch>
         }
