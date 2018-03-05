@@ -54,7 +54,11 @@ class UserOrders extends Component {
                     <List.Item>Arrived: <span className="bold" >{order.dateArrived ? order.dateArrived.substring(0, 10) : 'Has Not Arrived'}</span></List.Item>
                     <List.Item>Mailing Address: <span className="bold" >{order.mailingAddress}</span></List.Item>
                   </List.List>
-                  <OrderDetail products={order.purchasedCart.products} orderDate={order.dateOrdered} total={this.getOrderTotal(order.purchasedCart)} />
+                  {
+                    // we can remove this logic later
+                    order.purchasedCart &&
+                    <OrderDetail products={order.purchasedCart.products} orderDate={order.dateOrdered} total={this.getOrderTotal(order.purchasedCart)} />
+                  }
                 </List.Item>
               </List>
               </div>
