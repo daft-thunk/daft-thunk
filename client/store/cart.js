@@ -34,8 +34,8 @@ export const getUserCart = (userId, currentCart) => dispatch =>  {
   .then(cart => {
     if (cart && !currentCart.products.length){
         dispatch(fetchCart(cart.id));
-        axios.delete(`api/cart/${currentCart.id}`);
-        localStorage.clear();
+        // axios.delete(`api/cart/${currentCart.id}`);
+        // localStorage.clear();
       }
       else {
         axios.put(`/api/users/${userId}/cart`, { cartId: currentCart.id });
