@@ -10,7 +10,10 @@ export const fetchCart = cartId => dispatch => {
   axios.get(`/api/cart/${cartId}`)
     .then(res => res.data)
     .then(cart => dispatch(setCart(cart)))
-    .catch(console.error);
+    .catch(() => {
+      localStorage.clear();
+      dispatch(initCart());
+    });
 };
 
 export const initCart = () => dispatch => {
