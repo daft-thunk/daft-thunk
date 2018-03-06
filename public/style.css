@@ -27,6 +27,7 @@ hr {
   width: 10vw;
 }
 
+
 /* .site-container {
   padding: 0 8px;
 } */
@@ -300,7 +301,7 @@ hr {
 .ui.card, .ui.cards>.card {
   padding-left: 4px;
   padding-right: 4px;
-  background-color: white;
+
 }
 
 .ui.card>:first-child, .ui.cards>.card>:first-child {
