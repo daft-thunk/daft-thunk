@@ -17,9 +17,9 @@ export const ProductCard = (props) => {
       <Card.Content extra>
           <Icon name="dollar" />
           <span className="price-number">{props.product.price}</span>
-          <Button onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
+          <Button className="view-product-button" onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
           <Button fluid animated="vertical">
-      <Button.Content onClick={() => props.handleAddToCart(props.cartId, props.product.id)} hidden>Add to Cart</Button.Content>
+      <Button.Content className="add-to-cart-button" onClick={() => props.handleAddToCart(props.cartId, props.product.id)} hidden>Add to Cart</Button.Content>
       <Button.Content visible>
         <Icon name="shop" />
       </Button.Content>
