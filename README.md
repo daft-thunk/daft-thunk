@@ -1,54 +1,11 @@
-# Daft Thunk
+# Daft Thunk Direct
 *An ecommerce platform for music and apparel*
-- name: Daft Thunk Direct
-- put attractive user stories here
+- Customers can create carts and add products with and without accounts. 
+- Administrators are able to update core business functionality.
 
-## Developer Tasks
-```
-MEETING NOTES feb 28
-roles table. default: user. can be admin.
-orders - price charged, not what's in db (if changed)
-keep cart: user changes to logging in
-  - user object returned
-front end: cookies: store a crypto hash on cart model
-  we have to manage cookie info
-back end: session
-  - if cart cookies match, merge two carts
-associations: use 'as: categories'
-user model - scope: exclude sensitive data
+# Developer Notes
 
-MISC TODO
-package.json
-  No repository field.
-  change name, description
-
-eslint.json
-  "semi": [1, "always"]
-
-MODELS
-
-x product
-x user
-x order
-reviews
-  productId
-  userId (join to get user info?)
-  rating
-  text
-user_reviews_join
-cart
-cart_product_join
-categories (id, name)
-associations!!!
-
-DONE / To Review
-
-Linter fixed: npm install -g babel-eslint
-removed "prepush" from package.json
-```
-
-
-# Boilermaker
+## Boilermaker
 
 *Good things come in pairs*
 
