@@ -33,12 +33,11 @@ router.get('/:productId', (req, res, next) => {
 });
 
 // create new product - admin only
-// router.post('/', (req, res, next) => {
-//   Product.build(//req.body.properties)
-//     .then(//get categories from req.body)
-//     .then(product => res.json(product))
-//     .catch(next);
-// });
+router.post('/', (req, res, next) => {
+  Product.create(req.body)
+    .then(product => res.json(product))
+    .catch(next);
+});
 
 // delete product - admin only
 router.delete('/:productId', (req, res, next) => {
