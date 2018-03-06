@@ -35,7 +35,7 @@ router.get('/:productId', (req, res, next) => {
 // create new product - admin only
 router.post('/', (req, res, next) => {
   Product.create(req.body)
-    .then(product => res.json(product))
+    .then(createdProduct => res.json(createdProduct))
     .catch(next);
 });
 
