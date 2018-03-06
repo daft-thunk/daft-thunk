@@ -39,7 +39,9 @@ class OrderForm extends Component {
       this.setState({ zipError: true });
     } else {
       this.props.submitOrder({ email, mailingAddress: `${address} ${city}, ${state} ${zip}`, purchasedCart: this.props.cart, userId: this.props.user.id, cartId: this.props.cart.id });
+      window.emailjs.send("sendgrid", "Confirmation", {"email": email,"user": email})
     }
+
   }
 
   render() {
@@ -113,13 +115,6 @@ class OrderForm extends Component {
   }
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 
 const mapState = (state) => {
   return {
@@ -137,14 +132,4 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(OrderForm);
-
-/**
- * PROP TYPES
- */
-// ShippingForm.propTypes = {
-//   address: PropTypes.string.isRequired,
-//   city: PropTypes.string.isRequired,
-//   state: PropTypes.string.isRequired,
-//   zip: PropTypes.string.isRequired
-// };
 

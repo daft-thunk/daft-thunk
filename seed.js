@@ -20,7 +20,8 @@ const testUserData = {
   email: 'zeke@zeke.zeke',
   password: '123',
   passwordUpdateDate: '2018-01-15 00:56:24.038-06',
-  mailingAddress: '123 Test\nTest, CH 11111'
+  mailingAddress: '123 Test\nTest, CH 11111',
+  role: 'admin'
 };
 
 function generateProducts() {

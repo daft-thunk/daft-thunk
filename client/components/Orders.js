@@ -29,10 +29,21 @@ class Orders extends Component {
     this.props.fetchOrders();
   }
 
-  handleSubmit = (evt, orderId, orderStatus) => {
+  handleSubmit = (evt, orderId, orderStatus, order) => {
     evt.preventDefault();
     const status = this.state.changeOrderStatus;
     console.log('status / orderId', status, orderId);
+    console.log('user', order.user.fullName);
+    if (status === 'Processing') {
+      console.log('sending email!');
+      window.emailjs.send('sendgrid', 'shipped', {email: 'carlson.joshuaph@gmail.com', user: order.user.fullName});
+    }
+
+    if (status === 'Completed') {
+      console.log('firing completed email');
+      window.emailjs.send('sendgrid', 'completed', {email: 'carlson.joshuaph@gmail.com', user: order.user.fullName});
+    }
+
     if (status === '' || status === orderStatus) return;
     // else, save the new status to db
     this.props
@@ -139,7 +150,7 @@ class Orders extends Component {
                       <br />
                       <Form
                         onSubmit={evt => {
-                          this.handleSubmit(evt, order.id, order.status);
+                          this.handleSubmit(evt, order.id, order.status, order);
                         }}
                       >
                         <Form.Field
