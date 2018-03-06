@@ -5,6 +5,7 @@ import axios from 'axios';
 const INIT_PRODUCTS = 'INIT PRODUCTS';
 const FILTER_PRODUCTS = 'FILTER PRODUCTS';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 /**
  * ACTION CREATORS
@@ -12,6 +13,7 @@ const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const initProducts = (products) => ({type: INIT_PRODUCTS, products});
 export const filterProducts = (id) => ({type: FILTER_PRODUCTS, id});
 export const createProduct = (product) => ({type: CREATE_PRODUCT, product});
+export const updateProduct = (product) => ({type: CREATE_PRODUCT, product});
 
 /**
  * THUNK CREATORS
@@ -27,8 +29,17 @@ export const createProductThunk = (product) =>
   dispatch =>
     axios.post('/api/products', product)
       .then(res => {
-        console.log('thunk response',res)
-        return dispatch(createProduct(res.data))
+        console.log('thunk response', res);
+        return dispatch(createProduct(res.data));
+      })
+      .catch(err => console.log(err));
+
+export const updateProductThunk = (category) =>
+  dispatch =>
+    axios.put(`/api/products/${category.productId}`, category)
+      .then(res => {
+        console.log('thunk response', res);
+        return dispatch(createProduct(res.data));
       })
       .catch(err => console.log(err));
 
