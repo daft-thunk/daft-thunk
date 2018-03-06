@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, TextArea, Message } from 'semantic-ui-react';
+import { Form, TextArea, Message, Dropdown } from 'semantic-ui-react';
 import { createProductThunk } from '../store/products';
 // import PropTypes from 'prop-types';
 
@@ -8,11 +8,37 @@ class ProductAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: false
+      error: false,
+      product: false
     };
   }
 
+  getProductData() {
+    let productData;
+    console.log(this.props.match.params.id, this.props.products.allProducts.length);
+    if (this.props.match.params.id && this.props.products.allProducts.length) {
+      console.log('i am in');
+      productData = this.props.products.allProducts.find(product => {
+        return product.id === +this.props.match.params.id;
+      });
+    }
+    // console.log('product data', productData)
+    return productData;
+  }
+
+  prefillForm = (field, product) => {
+    if (product) {
+      return product[field];
+    } else {
+      return '';
+    }
+  }
+
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
+  handleCategoryChange = (e, { value }) => {
+    console.log('value', value);
+    this.setState({ category: value });
+  }
 
   validate(arr) {
     let valid = true;
@@ -55,7 +81,8 @@ class ProductAdd extends Component {
               'description',
               'imageUrl',
               'manufacturer',
-              'inventory'
+              'inventory',
+              'category'
             ].indexOf(key) > -1
           ) {
             this.setState({ [key]: '' });
@@ -65,15 +92,27 @@ class ProductAdd extends Component {
   };
 
   render() {
-    // console.log('PROPS', this.props)
+    console.log('PROPS', this.props);
+    // console.log('state:', this.state);
+
+    const categories = [
+      { key: 1, text: 'One', value: 1 },
+      { key: 2, text: 'Two', value: 2 },
+      { key: 3, text: 'Three', value: 3 },
+    ];
+
     const {
       name,
       price,
       description,
       imageUrl,
       manufacturer,
-      inventory
+      inventory,
+      category
     } = this.state;
+
+    const productData = this.getProductData();
+    console.log('product data', productData);
 
     return (
       <div>
@@ -82,14 +121,14 @@ class ProductAdd extends Component {
           <Form.Group>
             <Form.Input
               label="Product Name (Required)"
-              placeholder="Product Name (Required)"
+              defaultValue={this.prefillForm('name', productData)}
               name="name"
-              value={name === '' ? 'product name' : name}
+              value={name}
               onChange={this.handleChange}
             />
             <Form.Input
-              label="Price"
-              placeholder="Price"
+              label="Price (Required)"
+              defaultValue={this.prefillForm('price', productData)}
               name="price"
               value={price}
               onChange={this.handleChange}
@@ -119,13 +158,21 @@ class ProductAdd extends Component {
               onChange={this.handleChange}
             />
             <Form.Input
-              label="Inventory # in Stock"
+              label="Inventory # in Stock (Required)"
               placeholder="Inventory # in Stock"
               name="inventory"
               value={inventory}
               onChange={this.handleChange}
             />
           </Form.Group>
+          <Dropdown
+            labeled
+            onChange={this.handleCategoryChange}
+            options={categories}
+            placeholder="Choose an option"
+            selection
+            value={category}
+          />
           {this.state.error && (
             <Message
               error={this.state.error}
@@ -144,6 +191,8 @@ const mapState = state => {
   return {
     // cart: state.cart,
     // user: state.user
+    products: state.products,
+    activeProduct: state.activeProduct
   };
 };
 
