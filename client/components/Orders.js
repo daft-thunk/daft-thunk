@@ -35,13 +35,13 @@ class Orders extends Component {
     console.log('status / orderId', status, orderId);
     console.log('user', order.user.fullName);
     if (status === 'Processing') {
-      console.log('sending email!')
-      window.emailjs.send("sendgrid", "1", {"email":"carlson.joshuaph@gmail.com","user": order.user.fullName})
+      console.log('sending email!');
+      window.emailjs.send('sendgrid', 'shipped', {email: 'carlson.joshuaph@gmail.com', user: order.user.fullName});
     }
 
     if (status === 'Completed') {
-      console.log('firing completed email')
-      window.emailjs.send("sendgrid", "2", {"email":"carlson.joshuaph@gmail.com", "user": order.user.fullName})
+      console.log('firing completed email');
+      window.emailjs.send('sendgrid', 'completed', {email: 'carlson.joshuaph@gmail.com', user: order.user.fullName});
     }
 
     if (status === '' || status === orderStatus) return;
