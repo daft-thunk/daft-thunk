@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, TextArea, Message, Dropdown } from 'semantic-ui-react';
-import { createProductThunk } from '../store/products';
+import { Button, Form, TextArea, Message, Select } from 'semantic-ui-react';
+import { createProductThunk, updateProductThunk } from '../store/products';
+import { fetchCategories, createCategory } from '../store/categories';
 // import PropTypes from 'prop-types';
 
 class ProductAdd extends Component {
@@ -13,9 +14,16 @@ class ProductAdd extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.fetchCategories();
+  }
+
   getProductData() {
     let productData;
-    console.log(this.props.match.params.id, this.props.products.allProducts.length);
+    // console.log(
+    //   this.props.match.params.id,
+    //   this.props.products.allProducts.length
+    // );
     if (this.props.match.params.id && this.props.products.allProducts.length) {
       console.log('i am in');
       productData = this.props.products.allProducts.find(product => {
@@ -32,13 +40,13 @@ class ProductAdd extends Component {
     } else {
       return '';
     }
-  }
+  };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   handleCategoryChange = (e, { value }) => {
     console.log('value', value);
     this.setState({ category: value });
-  }
+  };
 
   validate(arr) {
     let valid = true;
@@ -50,6 +58,13 @@ class ProductAdd extends Component {
     });
     return valid;
   }
+  handleCategoryAddSubmit = (e) => {
+    e.preventDefault();
+    const { category } = this.state;
+    if (!category || !this.props.match.params.id) return;
+    this.props.addCategory({name: category, productId: this.props.match.params.id});
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const {
@@ -95,11 +110,15 @@ class ProductAdd extends Component {
     console.log('PROPS', this.props);
     // console.log('state:', this.state);
 
-    const categories = [
-      { key: 1, text: 'One', value: 1 },
-      { key: 2, text: 'Two', value: 2 },
-      { key: 3, text: 'Three', value: 3 },
-    ];
+    const categories = this.props.categories
+      ? this.props.categories.map(cat => {
+          return {
+            key: cat.id,
+            text: cat.name,
+            value: cat.name
+          };
+        })
+      : [];
 
     const {
       name,
@@ -113,6 +132,7 @@ class ProductAdd extends Component {
 
     const productData = this.getProductData();
     console.log('product data', productData);
+    console.log('return prefill:', this.prefillForm('name', productData));
 
     return (
       <div>
@@ -165,21 +185,26 @@ class ProductAdd extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Dropdown
-            labeled
+          <h3>Current Categories</h3>
+          {
+            productData && productData.categories.length ?
+            productData.categories.map(cat => {
+              return (
+                <h4 key={cat.id}>{cat.name}</h4>
+              );
+            })
+            : <h4>None</h4>
+          }
+          <Form.Field
+            control={Select}
             onChange={this.handleCategoryChange}
             options={categories}
-            placeholder="Choose an option"
+            placeholder="Add a new category"
             selection
             value={category}
           />
-          {this.state.error && (
-            <Message
-              error={this.state.error}
-              header="Please fill out all required fields"
-              content=""
-            />
-          )}
+          <Button content="Add Category to Product" onClick={this.handleCategoryAddSubmit} />
+          <br />
           <Form.Button content="Submit" />
         </Form>
       </div>
@@ -189,10 +214,9 @@ class ProductAdd extends Component {
 
 const mapState = state => {
   return {
-    // cart: state.cart,
-    // user: state.user
     products: state.products,
-    activeProduct: state.activeProduct
+    activeProduct: state.activeProduct,
+    categories: state.categories
   };
 };
 
@@ -200,6 +224,15 @@ const mapDispatch = dispatch => {
   return {
     createProduct(product) {
       return dispatch(createProductThunk(product));
+    },
+    createCategory(category) {
+      return dispatch(createCategory(category));
+    },
+    addCategory(category) {
+      return dispatch(updateProductThunk(category));
+    },
+    fetchCategories() {
+      return dispatch(fetchCategories());
     }
   };
 };
