@@ -32,7 +32,6 @@ router.post('/', (req, res, next) => {
 router.put('/:orderId', (req, res, next) => {
   Order.findById(+req.params.orderId)
     .then(orderInstance => {
-      console.log(orderInstance.get());
       return orderInstance.update({status: req.body.status});
     })
     .then(updatedOrder => res.json(updatedOrder))

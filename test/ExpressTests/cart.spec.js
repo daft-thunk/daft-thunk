@@ -7,12 +7,12 @@ const app = require('../../server/index');
 const User = db.model('user');
 const Cart = db.model('cart');
 
-describe('User routes', () => {
+describe('Cart routes', () => {
   beforeEach(() => {
     return db.sync({force: true});
   });
 
-  describe('/api/users/', () => {
+  describe('/api/cart/', () => {
     const codysEmail = 'cody@puppybook.com';
 
 
@@ -22,15 +22,9 @@ describe('User routes', () => {
       testUser.setCart(testCart);
     });
 
-    it('As a non admin you cannot retrieve all users. GET /api/users', () => {
+    it('Gets a cart GET api/cart/id', () => {
       return request(app)
-        .get('/api/users')
-        .expect(403);
-    });
-
-    it('gets a users cart. Get /api/user/id/cart', () => {
-      return request(app)
-        .get('/api/users/1/cart')
+        .get('/api/cart/1')
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object');
@@ -38,20 +32,20 @@ describe('User routes', () => {
         });
     });
 
-    it('sets a users cart. Put /api/user/id/cart', () => {
+    it('creates a cart. POST /api/cart', () => {
       return request(app)
-        .put('/api/users/1/cart')
-        .send({cartId: 1})
-        .expect(201);
+        .post('/api/cart')
+        .expect(200)
+        .then(res => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.id).to.be.equal(2);
+        });
     });
 
-    it('deletes a user. DELETE api/user/id', () => {
+    it('deletes a cart. DELETE /api/user/id/cart', () => {
       return request(app)
-        .delete('/api/users/1')
+        .delete('/api/cart/1')
         .expect(204);
     });
-
   });
-
-}); // end describe('User routes')
-
+});
