@@ -9,6 +9,11 @@ export function Home(props){
       <div className="altcarousel">
         <AltCarousel />
       </div>
+      <hr />
+      <div className="cover">
+        <h2>Popular Items</h2>
+      </div>
+      <hr />
       {
         props.products.length &&
         <div className="featured">

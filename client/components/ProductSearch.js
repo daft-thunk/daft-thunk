@@ -14,7 +14,7 @@ import history from '../history'
 //   price: faker.finance.amount(0, 100, 2, '$'),
 // }));
 
-class ProductSearch extends Component {
+export class ProductSearch extends Component {
   // constructor(props) {
   //   super(props);
   //   this.source = this.props.products;
