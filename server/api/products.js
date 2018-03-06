@@ -24,9 +24,7 @@ router.get('/:productId', (req, res, next) => {
         include: [User]
       }
     ],
-    order: [
-      [{model: Review}, 'createdAt', 'DESC']
-    ]
+    order: [[{ model: Review }, 'createdAt', 'DESC']]
   })
     .then(product => res.json(product))
     .catch(next);
@@ -36,6 +34,14 @@ router.get('/:productId', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Product.create(req.body)
     .then(createdProduct => res.json(createdProduct))
+    .catch(next);
+});
+
+// update product - admin only
+router.put('/:productId', (req, res, next) => {
+  Product.findById(req.params.productId)
+    .then(foundProduct => foundProduct.addCategory(req.body.name))
+    .then(updatedProduct => res.json(updatedProduct))
     .catch(next);
 });
 
