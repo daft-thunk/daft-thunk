@@ -2,8 +2,8 @@
 
 const {expect} = require('chai')
 const request = require('supertest')
-const db = require('../db')
-const app = require('../index')
+const db = require('../../server/db')
+const app = require('../../server/index')
 const User = db.model('user')
 
 describe('User routes', () => {
@@ -15,9 +15,18 @@ describe('User routes', () => {
     const codysEmail = 'cody@puppybook.com'
 
     beforeEach(() => {
-      return User.create({
+      const testUser = User.build({
         email: codysEmail
       })
+      testUser.setCart(3)
+      testUser.save()
+      .then((user) =>  user)
+    })
+
+    it('As a non admin you cannot retrieve all users. GET /api/users', () => {
+      return request(app)
+        .get('/api/users')
+        .expect(403)
     })
 
     it('GET /api/users', () => {
@@ -25,5 +34,8 @@ describe('User routes', () => {
         .get('/api/users')
         .expect(403)
     })
-  }) // end describe('/api/users')
+
+  })
+
 }) // end describe('User routes')
+
