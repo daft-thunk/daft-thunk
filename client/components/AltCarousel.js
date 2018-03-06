@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
 import { Carousel } from 'react-responsive-carousel';
+import { Button } from 'semantic-ui-react';
 
-//Currently using this carousel
+//Currently using this carousel (1024 x 524)
 export default class altCarousel extends Component {
   render() {
-      return (
-          <Carousel  showThumbs={false} showStatus={false} infiniteLoop={true} autoPlay={true} interval={5000} transitionTime={500}>
-              <div>
-                  <img src="http://www.collingsguitars.com/img/home/t-series-2017-alt.jpg" />
-                  <p className="legend">Legend 1</p>
-              </div>
-              <div>
-                  <img src="https://www.native-instruments.com/typo3temp/pics/img-welcome-hero-studio-drummer-c1ac5742d634802b0cab948d9c4f3d23-d.jpg" />
-                  <p className="legend">Legend 2</p>
-              </div>
-              <div>
-                  <img src="https://usa.yamaha.com/files/GB1K_1000x400_1200x480_bf8ff5dbe8358af2fb8496c3d3f0768b.jpg" />
-                  <p className="legend">Legend 3</p>
-              </div>
-          </Carousel>
-      );
+    return (
+      <Carousel className="main-carousel" showThumbs={false} showStatus={false} infiniteLoop={true} autoPlay={true} interval={5000} transitionTime={500}>
+        <div className="slide">
+          <img className="cover-img" src="/images/cover1.jpg" />
+          <div>
+            <h1 className="legend text-align">Shredding the Competition</h1>
+          </div>
+          <Button className="car-btn" inverted color='grey'>View All Products</Button>
+        </div>
+        <div className="slide">
+          <img className="cover-img" src="/images/cover2.jpg" />
+          <div>
+            <h1 className="legend text-align"><span>Un<i>beat</i>able Drum Prices</span></h1>
+            </div>
+            <Button className="car-btn" inverted color='grey'>View All Products</Button>
+        </div>
+        <div className="slide">
+          <img className="cover-img" src="/images/cover3.jpg" />
+          <div className="thirdslide">
+            <h1 className="legend">Top Line Synths</h1>
+          </div>
+          <Button className="car-btn" inverted color='grey'>View All Products</Button>
+        </div>
+      </Carousel>
+    );
   }
 }
 
+
+//http://www.guitar-academy.com/wallpapers.asp
+// http://www.collingsguitars.com/img/home/t-series-2017-alt.jpg
