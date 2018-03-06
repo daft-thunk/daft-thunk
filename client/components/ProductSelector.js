@@ -13,7 +13,7 @@ const instruments = [
 ];
 
 
-const ProductSelector = (props) => (
+export const ProductSelector = (props) => (
   <Dropdown onChange={(event, data) => props.handleChange(data.value)} placeholder="Select Category" fluid selection options={instruments} />
 );
 
