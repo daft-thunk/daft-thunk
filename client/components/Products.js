@@ -5,7 +5,7 @@ import { ProductSearch, ProductSelector, ProductCard } from './index';
 export function Products(props) {
   return (
     <div>
-      <h1> all the products</h1>
+      <h1>all the products</h1>
       <div className="flex">
         <ProductSearch />
         <ProductSelector />

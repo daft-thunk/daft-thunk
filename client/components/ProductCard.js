@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setProduct, addProductToCart } from '../store';
 
-const ProductCard = (props) => {
+export const ProductCard = (props) => {
   // TODO set up onclick for add to cart
   return (
     <Card>
       <Image src={props.product.imageUrl} />
       <Card.Content>
-        <Card.Header>
+        <Card.Header className="product-name">
           {props.product.name}
         </Card.Header>
       </Card.Content>
