@@ -8,7 +8,7 @@ export const ProductCard = (props) => {
   // TODO set up onclick for add to cart
   return (
     <Card>
-      <Image src={props.product.imageUrl} />
+      <Image className="product-image" src={props.product.imageUrl} />
       <Card.Content>
         <Card.Header className="product-name">
           {props.product.name}
@@ -16,7 +16,7 @@ export const ProductCard = (props) => {
       </Card.Content>
       <Card.Content extra>
           <Icon name="dollar" />
-          {props.product.price}
+          <span className="price-number">{props.product.price}</span>
           <Button onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
           <Button fluid animated="vertical">
       <Button.Content onClick={() => props.handleAddToCart(props.cartId, props.product.id)} hidden>Add to Cart</Button.Content>

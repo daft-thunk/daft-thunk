@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import React from 'react';
-import enzyme, {shallow} from 'enzyme';
+import enzyme, {shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Products} from '../client/components/Products';
 import {ProductCard} from '../client/components/ProductCard';
@@ -66,7 +66,7 @@ describe('Product Card', () => {
   beforeEach(() => {
     const product = {
       name: 'Fender Telecaster',
-      price: 500.50,
+      price: 500.51,
       description: 'Blah Blah Telecaster Blah',
       manufacturer: 'Fender',
       stock: 10,
@@ -76,13 +76,20 @@ describe('Product Card', () => {
     productCard = shallow(<ProductCard product={product} />)
   })
   it('displays product name', () => {
-    let name = productCard.find('.product-name');
-    expect(name.text()).to.eql('Fender Telecaster')
+    let name = productCard.find('.product-name').dive();
+    expect(name.text()).to.eql('Fender Telecaster');
   });
 
-  it('displays correct product price');
+  it('displays correct product price', () => {
+    let price = productCard.find('.price-number');
+    expect(price.text()).to.eql('500.51');
+  });
 
-  it('displays correct product image');
+  it('displays correct product image', () => {
+    let img = productCard.find('.product-image').dive();
+    // console.log(img.prop('src'))
+    expect(img.prop('src')).to.eql('/images/fender-telecaster.png');
+  });
 
   it('has button ');
 });
