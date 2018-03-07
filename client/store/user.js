@@ -43,9 +43,10 @@ export const auth = (email, password, method) =>
 
 export const logout = () =>
   dispatch => {
-    // localStorage.clear();
+    console.log('hiting logout')
+    localStorage.clear();
     return axios.post('/auth/logout')
-      .then(_ => {
+      .then( () => {
         dispatch(removeUser());
         dispatch(initCart());
         history.push('/login');

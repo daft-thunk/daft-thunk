@@ -164,7 +164,11 @@ hr {
 
 #authForm {
   width: 50vw;
-  height: 50vh;
+<<<<<<< HEAD
+  height: 55vh;
+=======
+  height: 60vh;
+>>>>>>> master
   margin: auto;
   background: rgba(152, 230, 230, 0.221);
 }

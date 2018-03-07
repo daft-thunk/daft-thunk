@@ -52,7 +52,7 @@ class Navbar extends Component {
         }
 
         {this.props.isLoggedIn &&
-        <Menu.Item as={Link} to="/login" name="logout">
+        <Menu.Item as={Link} to="/login" name="logout" onClick={this.props.handleClick}>
           Logout
         </Menu.Item>
         }
