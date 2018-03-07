@@ -15,15 +15,15 @@ export const ProductCard = (props) => {
         </Card.Header>
       </Card.Content>
       <Card.Content extra>
-          <Icon name="dollar" />
-          <span className="price-number">{props.product.price}</span>
-          <Button className="view-product-button" onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
-          <Button fluid animated="vertical">
-      <Button.Content className="add-to-cart-button" onClick={() => props.handleAddToCart(props.cartId, props.product.id)} hidden>Add to Cart</Button.Content>
-      <Button.Content visible>
-        <Icon name="shop" />
-      </Button.Content>
-    </Button>
+        <Button className="view-product-button" onClick={props.handleClick} as={Link} to={`/products/${props.product.id}`} floated="right" color="google plus">View Product</Button>
+        <Icon name="dollar" />
+        <span className="price-number">{props.product.price}</span>
+        <Button fluid animated="vertical">
+          <Button.Content className="add-to-cart-button" onClick={() => props.handleAddToCart(props.cartId, props.product.id)} hidden>Add to Cart</Button.Content>
+          <Button.Content visible>
+            <Icon name="shop" />
+          </Button.Content>
+        </Button>
       </Card.Content>
     </Card>
   );
@@ -34,11 +34,11 @@ const mapProps = (state) => ({
 });
 
 const mapDispatch = (dispatch, ownProps) => ({
-  handleClick(){
+  handleClick() {
     dispatch(setProduct(ownProps.product));
   },
   handleAddToCart(cartId, productId) {
-    dispatch(addProductToCart(cartId, { productId } ));
+    dispatch(addProductToCart(cartId, { productId }));
   }
 });
 
