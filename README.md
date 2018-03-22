@@ -1,5 +1,8 @@
 # Daft Thunk Direct
 *An ecommerce platform for music and apparel*
+
+[View Site](https://daft-thunk-direct.herokuapp.com/)
+
 - Customers can create carts and add products with and without accounts. 
 - Administrators are able to update core business functionality.
 
